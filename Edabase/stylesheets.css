@@ -1,0 +1,76 @@
+body {
+    font-size: 10pt;
+    font-family: Arial;
+    margin-top: 0;
+    margin-bottom: 30;
+}
+
+td {
+    font-size: 10pt;
+    vertical-align: top;
+    horizontal-align: left;
+}
+
+h1 {
+    font-size: 20pt;
+    color: #9C0000;
+    margin-top: 5;
+    margin-bottom: 15;
+    font-weight: 600;
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+    border-bottom-color: #D7D7D7;
+    align: right;
+}
+
+img {
+    border-color: #000000;
+}
+
+table {
+    font-size: 10pt;
+    color: #222222;
+}
+
+table.center {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+ul {
+    font-size: 10pt;
+    margin-top: 5;
+    margin-bottom: 5;
+    list-style-image: url('http://www.edabase.com/log/Images/arrow.gif');
+}
+
+hr {
+    height: 1px;
+    color: #D7D7D7;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+a:link {
+    color: #2A5585
+}
+
+a:visited {
+    color: #2A5585
+}
+
+a:active {
+    color: #CC3300
+}
+
+a.alternative:link {
+    color: #FFFFFF;
+}
+
+a.alternative:visited {
+    color: #FFFFFF;
+}
+
+a.alternative:active {
+    color: #FFFFFF;
+}
