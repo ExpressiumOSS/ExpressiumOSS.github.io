@@ -1,0 +1,47 @@
+14:40:08 INFO Expressium.Coffeeshop.Web.API.Tests.BaseTestFixture # 
+14:40:08 INFO Expressium.Coffeeshop.Web.API.Tests.BaseTestFixture # // Initialize Test Fixture
+14:40:08 INFO Expressium.Coffeeshop.Web.API.Tests.BaseTestFixture # Company: Expressium
+14:40:08 INFO Expressium.Coffeeshop.Web.API.Tests.BaseTestFixture # Project: Coffeeshop
+14:40:08 INFO Expressium.Coffeeshop.Web.API.Tests.BaseTestFixture # Environment: Development
+14:40:08 INFO Expressium.Coffeeshop.Web.API.Tests.BaseTestFixture # Url: https://expressium.dev/coffeeshop/index.html
+14:40:08 INFO Expressium.Coffeeshop.Web.API.Tests.BaseTestFixture # Id: 
+14:40:08 INFO Expressium.Coffeeshop.Web.API.Tests.BaseTestFixture # Name: SuccessfulResubmittingARegistrationInquiry
+14:40:08 INFO Expressium.Coffeeshop.Web.API.Tests.BaseTestFixture # Category: TA-2003
+14:40:08 INFO Expressium.Coffeeshop.Web.API.Tests.BaseTestFixture # Description: Successful Resubmitting a Registration Inquiry
+14:40:08 INFO Expressium.Coffeeshop.Web.API.Tests.BaseTestFixture # Date: 30-08-2025 14:40
+14:40:08 INFO Expressium.Coffeeshop.Web.API.Tests.BaseHooks # 
+14:40:08 INFO Expressium.Coffeeshop.Web.API.Tests.BaseHooks # // When I complete and submit the Registration formular
+14:40:12 INFO Expressium.Coffeeshop.Web.API.Pages.LoginPage # ClickCreateAnAccount()
+14:40:12 INFO Expressium.Coffeeshop.Web.API.Pages.RegistrationPage # SetFirstName(John)
+14:40:13 INFO Expressium.Coffeeshop.Web.API.Pages.RegistrationPage # SetLastName(Doe)
+14:40:13 INFO Expressium.Coffeeshop.Web.API.Pages.RegistrationPage # SetCountry(Denmark)
+14:40:14 INFO Expressium.Coffeeshop.Web.API.Pages.RegistrationPage # SetVehicle(Volvo)
+14:40:14 INFO Expressium.Coffeeshop.Web.API.Pages.RegistrationPage # SetMale(False)
+14:40:14 INFO Expressium.Coffeeshop.Web.API.Pages.RegistrationPage # SetFemale(True)
+14:40:15 INFO Expressium.Coffeeshop.Web.API.Pages.RegistrationPage # SetIAgreeToTheTermsOfUse(True)
+14:40:16 INFO Expressium.Coffeeshop.Web.API.Pages.RegistrationPage # ClickSubmit()
+14:40:16 INFO Expressium.Coffeeshop.Web.API.Tests.BaseHooks # 
+14:40:16 INFO Expressium.Coffeeshop.Web.API.Tests.BaseHooks # // When I complete and submit the Registration formular
+14:40:16 INFO Expressium.Coffeeshop.Web.API.Pages.LoginPage # ClickCreateAnAccount()
+14:40:17 INFO Expressium.Coffeeshop.Web.API.Pages.RegistrationPage # SetFirstName(John)
+14:40:17 INFO Expressium.Coffeeshop.Web.API.Pages.RegistrationPage # SetLastName(Doe)
+14:40:17 INFO Expressium.Coffeeshop.Web.API.Pages.RegistrationPage # SetCountry(Denmark)
+14:40:18 INFO Expressium.Coffeeshop.Web.API.Pages.RegistrationPage # SetVehicle(Volvo)
+14:40:18 INFO Expressium.Coffeeshop.Web.API.Pages.RegistrationPage # SetMale(False)
+14:40:18 INFO Expressium.Coffeeshop.Web.API.Pages.RegistrationPage # SetFemale(True)
+14:40:18 INFO Expressium.Coffeeshop.Web.API.Pages.RegistrationPage # SetIAgreeToTheTermsOfUse(True)
+14:40:19 INFO Expressium.Coffeeshop.Web.API.Pages.RegistrationPage # ClickSubmit()
+14:40:19 INFO Expressium.Coffeeshop.Web.API.Tests.BaseHooks # 
+14:40:19 INFO Expressium.Coffeeshop.Web.API.Tests.BaseHooks # // Then I should be redirected to the Login page
+14:40:19 INFO Expressium.Coffeeshop.Web.API.BasePage # GetTitle()
+14:40:19 INFO Expressium.Coffeeshop.Web.API.Tests.Asserts # Validate the LoginPage title property...
+14:40:19 INFO Expressium.Coffeeshop.Web.API.Tests.Asserts # Expected to be equal [Login] and was [Login] - PASSED
+14:40:19 INFO Expressium.Coffeeshop.Web.API.Tests.BaseTestFixture # 
+14:40:19 INFO Expressium.Coffeeshop.Web.API.Tests.BaseTestFixture # // Finalize Test Fixture
+14:40:19 INFO Expressium.Coffeeshop.Web.API.Tests.BaseTestFixture # Screenshot has been saved: SuccessfulResubmittingARegistrationInquiry.png
+14:40:20 INFO Expressium.Coffeeshop.Web.API.Tests.BaseTestFixture # Number of passed tests: 1
+14:40:20 INFO Expressium.Coffeeshop.Web.API.Tests.BaseTestFixture # Number of skipped tests: 0
+14:40:20 INFO Expressium.Coffeeshop.Web.API.Tests.BaseTestFixture # Number of inconclusive tests: 0
+14:40:20 INFO Expressium.Coffeeshop.Web.API.Tests.BaseTestFixture # Number of failed tests: 0
+14:40:20 INFO Expressium.Coffeeshop.Web.API.Tests.BaseTestFixture # Testcase was successfully executed...
+

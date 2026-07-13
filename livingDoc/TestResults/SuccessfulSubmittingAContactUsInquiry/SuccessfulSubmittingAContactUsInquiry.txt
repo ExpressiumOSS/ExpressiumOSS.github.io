@@ -1,0 +1,38 @@
+14:40:20 INFO Expressium.Coffeeshop.Web.API.Tests.BaseTestFixture # 
+14:40:20 INFO Expressium.Coffeeshop.Web.API.Tests.BaseTestFixture # // Initialize Test Fixture
+14:40:20 INFO Expressium.Coffeeshop.Web.API.Tests.BaseTestFixture # Company: Expressium
+14:40:20 INFO Expressium.Coffeeshop.Web.API.Tests.BaseTestFixture # Project: Coffeeshop
+14:40:20 INFO Expressium.Coffeeshop.Web.API.Tests.BaseTestFixture # Environment: Development
+14:40:20 INFO Expressium.Coffeeshop.Web.API.Tests.BaseTestFixture # Url: https://expressium.dev/coffeeshop/index.html
+14:40:20 INFO Expressium.Coffeeshop.Web.API.Tests.BaseTestFixture # Id: 
+14:40:20 INFO Expressium.Coffeeshop.Web.API.Tests.BaseTestFixture # Name: SuccessfulSubmittingAContactUsInquiry
+14:40:20 INFO Expressium.Coffeeshop.Web.API.Tests.BaseTestFixture # Category: TA-3001
+14:40:20 INFO Expressium.Coffeeshop.Web.API.Tests.BaseTestFixture # Description: Successful Submitting a Contact Us Inquiry
+14:40:20 INFO Expressium.Coffeeshop.Web.API.Tests.BaseTestFixture # Date: 30-08-2025 14:40
+14:40:20 INFO Expressium.Coffeeshop.Web.API.Tests.BaseHooks # 
+14:40:20 INFO Expressium.Coffeeshop.Web.API.Tests.BaseHooks # // Given I have logged in with valid user credentials
+14:40:22 INFO Expressium.Coffeeshop.Web.API.Pages.LoginPage # SetUsername(john.doe@microsoft.com)
+14:40:23 INFO Expressium.Coffeeshop.Web.API.Pages.LoginPage # SetPassword(1234567890)
+14:40:24 INFO Expressium.Coffeeshop.Web.API.Pages.LoginPage # ClickLogin()
+14:40:24 INFO Expressium.Coffeeshop.Web.API.Tests.BaseHooks # 
+14:40:24 INFO Expressium.Coffeeshop.Web.API.Tests.BaseHooks # // When I complete and submit the Contact Us formular
+14:40:24 INFO Expressium.Coffeeshop.Web.API.Pages.MainMenuBar # ClickContactUs()
+14:40:25 INFO Expressium.Coffeeshop.Web.API.Pages.ContactUsPage # SetName(John Doe)
+14:40:25 INFO Expressium.Coffeeshop.Web.API.Pages.ContactUsPage # SetEmail(john.doe@microsoft.com)
+14:40:26 INFO Expressium.Coffeeshop.Web.API.Pages.ContactUsPage # SetSubject(Detailed product information)
+14:40:26 INFO Expressium.Coffeeshop.Web.API.Pages.ContactUsPage # SetMessage(Please send some more detailed product information...)
+14:40:26 INFO Expressium.Coffeeshop.Web.API.Pages.ContactUsPage # ClickSend()
+14:40:27 INFO Expressium.Coffeeshop.Web.API.Tests.BaseHooks # 
+14:40:27 INFO Expressium.Coffeeshop.Web.API.Tests.BaseHooks # // Then I should receive an inquiry confirmation message
+14:40:27 INFO Expressium.Coffeeshop.Web.API.Pages.ContactUsPage # GetNotification()
+14:40:27 INFO Expressium.Coffeeshop.Web.API.Tests.Asserts # Validate ContactUsPage notification message...
+14:40:27 INFO Expressium.Coffeeshop.Web.API.Tests.Asserts # Expected to be equal [Your contact information has been send - Thanks...] and was [Your contact information has been send - Thanks...] - PASSED
+14:40:27 INFO Expressium.Coffeeshop.Web.API.Tests.BaseTestFixture # 
+14:40:27 INFO Expressium.Coffeeshop.Web.API.Tests.BaseTestFixture # // Finalize Test Fixture
+14:40:27 INFO Expressium.Coffeeshop.Web.API.Tests.BaseTestFixture # Screenshot has been saved: SuccessfulSubmittingAContactUsInquiry.png
+14:40:27 INFO Expressium.Coffeeshop.Web.API.Tests.BaseTestFixture # Number of passed tests: 1
+14:40:27 INFO Expressium.Coffeeshop.Web.API.Tests.BaseTestFixture # Number of skipped tests: 0
+14:40:27 INFO Expressium.Coffeeshop.Web.API.Tests.BaseTestFixture # Number of inconclusive tests: 0
+14:40:27 INFO Expressium.Coffeeshop.Web.API.Tests.BaseTestFixture # Number of failed tests: 0
+14:40:27 INFO Expressium.Coffeeshop.Web.API.Tests.BaseTestFixture # Testcase was successfully executed...
+

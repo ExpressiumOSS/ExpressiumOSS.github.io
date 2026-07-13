@@ -1,0 +1,59 @@
+14:40:08 INFO Expressium.Coffeeshop.Web.API.Tests.BaseTestFixture # 
+14:40:08 INFO Expressium.Coffeeshop.Web.API.Tests.BaseTestFixture # // Initialize Test Fixture
+14:40:08 INFO Expressium.Coffeeshop.Web.API.Tests.BaseTestFixture # Company: Expressium
+14:40:08 INFO Expressium.Coffeeshop.Web.API.Tests.BaseTestFixture # Project: Coffeeshop
+14:40:08 INFO Expressium.Coffeeshop.Web.API.Tests.BaseTestFixture # Environment: Development
+14:40:08 INFO Expressium.Coffeeshop.Web.API.Tests.BaseTestFixture # Url: https://expressium.dev/coffeeshop/index.html
+14:40:08 INFO Expressium.Coffeeshop.Web.API.Tests.BaseTestFixture # Id: 
+14:40:08 INFO Expressium.Coffeeshop.Web.API.Tests.BaseTestFixture # Name: SuccessfulCancelingARegistrationInquiry
+14:40:08 INFO Expressium.Coffeeshop.Web.API.Tests.BaseTestFixture # Category: TA-2002
+14:40:08 INFO Expressium.Coffeeshop.Web.API.Tests.BaseTestFixture # Description: Successful Canceling a Registration Inquiry
+14:40:08 INFO Expressium.Coffeeshop.Web.API.Tests.BaseTestFixture # Date: 30-08-2025 14:40
+14:40:08 INFO Expressium.Coffeeshop.Web.API.Tests.BaseHooks # 
+14:40:08 INFO Expressium.Coffeeshop.Web.API.Tests.BaseHooks # // When I complete and cancel the Registration formular
+14:40:12 INFO Expressium.Coffeeshop.Web.API.Pages.LoginPage # ClickCreateAnAccount()
+14:40:13 INFO Expressium.Coffeeshop.Web.API.Pages.RegistrationPage # SetFirstName(John)
+14:40:13 INFO Expressium.Coffeeshop.Web.API.Pages.RegistrationPage # SetLastName(Doe)
+14:40:13 INFO Expressium.Coffeeshop.Web.API.Pages.RegistrationPage # SetCountry(Denmark)
+14:40:14 INFO Expressium.Coffeeshop.Web.API.Pages.RegistrationPage # SetVehicle(Volvo)
+14:40:14 INFO Expressium.Coffeeshop.Web.API.Pages.RegistrationPage # SetMale(False)
+14:40:14 INFO Expressium.Coffeeshop.Web.API.Pages.RegistrationPage # SetFemale(True)
+14:40:15 INFO Expressium.Coffeeshop.Web.API.Pages.RegistrationPage # SetIAgreeToTheTermsOfUse(True)
+14:40:16 INFO Expressium.Coffeeshop.Web.API.Pages.RegistrationPage # ClickCancel()
+14:40:21 INFO Expressium.Coffeeshop.Web.API.Tests.BaseTestFixture # 
+14:40:21 INFO Expressium.Coffeeshop.Web.API.Tests.BaseTestFixture # // Finalize Test Fixture
+14:40:22 INFO Expressium.Coffeeshop.Web.API.Tests.BaseTestFixture # Screenshot has been saved: SuccessfulCancelingARegistrationInquiry.png
+14:40:23 ERROR Expressium.Coffeeshop.Web.API.Tests.BaseTestFixture # System.ApplicationException : Page element 'By.Name: cancel' was expected to exist within 5000 milliseconds...
+14:40:23 DEBUG Expressium.Coffeeshop.Web.API.Tests.BaseTestFixture #    at Expressium.Coffeeshop.Web.API.WebElements.WaitForElementExist(By locator, IWebDriver driver) in C:\Company\Source\Expressium.LivingDoc\Expressium.Coffeeshop.Web.API\WebElements.cs:line 145
+14:40:23 DEBUG Expressium.Coffeeshop.Web.API.Tests.BaseTestFixture #    at Expressium.Coffeeshop.Web.API.WebElements.GetElement(By locator, IWebDriver driver) in C:\Company\Source\Expressium.LivingDoc\Expressium.Coffeeshop.Web.API\WebElements.cs:line 274
+14:40:23 DEBUG Expressium.Coffeeshop.Web.API.Tests.BaseTestFixture #    at Expressium.Coffeeshop.Web.API.Controls.WebControl.GetElement() in C:\Company\Source\Expressium.LivingDoc\Expressium.Coffeeshop.Web.API\Controls\WebControl.cs:line 51
+14:40:23 DEBUG Expressium.Coffeeshop.Web.API.Tests.BaseTestFixture #    at Expressium.Coffeeshop.Web.API.Controls.WebControl.WaitForElementIsEnabled() in C:\Company\Source\Expressium.LivingDoc\Expressium.Coffeeshop.Web.API\Controls\WebControl.cs:line 81
+14:40:23 DEBUG Expressium.Coffeeshop.Web.API.Tests.BaseTestFixture #    at Expressium.Coffeeshop.Web.API.Controls.WebButton.Click() in C:\Company\Source\Expressium.LivingDoc\Expressium.Coffeeshop.Web.API\Controls\WebButton.cs:line 17
+14:40:23 DEBUG Expressium.Coffeeshop.Web.API.Tests.BaseTestFixture #    at Expressium.Coffeeshop.Web.API.Pages.RegistrationPage.ClickCancel() in C:\Company\Source\Expressium.LivingDoc\Expressium.Coffeeshop.Web.API\Pages\RegistrationPage.cs:line 127
+14:40:23 DEBUG Expressium.Coffeeshop.Web.API.Tests.BaseTestFixture #    at Expressium.Coffeeshop.Web.API.Tests.Steps.RegistrationSteps.WhenICompleteAndCancelTheRegistrationFormular() in C:\Company\Source\Expressium.LivingDoc\Expressium.Coffeeshop.Web.API.Tests\Steps\RegistrationSteps.cs:line 38
+14:40:23 DEBUG Expressium.Coffeeshop.Web.API.Tests.BaseTestFixture #    at InvokeStub_Action`1.Invoke(Object, Span`1)
+14:40:23 DEBUG Expressium.Coffeeshop.Web.API.Tests.BaseTestFixture #    at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+14:40:23 DEBUG Expressium.Coffeeshop.Web.API.Tests.BaseTestFixture # --- End of stack trace from previous location ---
+14:40:23 DEBUG Expressium.Coffeeshop.Web.API.Tests.BaseTestFixture #    at Reqnroll.Bindings.BindingInvoker.InvokeBindingAsync(IBinding binding, IContextManager contextManager, Object[] arguments, ITestTracer testTracer, DurationHolder durationHolder)
+14:40:23 DEBUG Expressium.Coffeeshop.Web.API.Tests.BaseTestFixture #    at Reqnroll.Infrastructure.TestExecutionEngine.ExecuteStepMatchAsync(BindingMatch match, Object[] arguments, DurationHolder durationHolder)
+14:40:23 DEBUG Expressium.Coffeeshop.Web.API.Tests.BaseTestFixture #    at Reqnroll.Infrastructure.TestExecutionEngine.ExecuteStepMatchAsync(BindingMatch match, Object[] arguments, DurationHolder durationHolder)
+14:40:23 DEBUG Expressium.Coffeeshop.Web.API.Tests.BaseTestFixture #    at Reqnroll.Infrastructure.TestExecutionEngine.<>c__DisplayClass56_0.<<ExecuteStepAsync>b__7>d.MoveNext()
+14:40:23 DEBUG Expressium.Coffeeshop.Web.API.Tests.BaseTestFixture # --- End of stack trace from previous location ---
+14:40:23 DEBUG Expressium.Coffeeshop.Web.API.Tests.BaseTestFixture #    at Reqnroll.Infrastructure.TestExecutionEngine.<>c__DisplayClass56_0.<<ExecuteStepAsync>g__HandleStepExecutionExceptions|0>d.MoveNext()
+14:40:23 DEBUG Expressium.Coffeeshop.Web.API.Tests.BaseTestFixture #    at Reqnroll.Infrastructure.TestExecutionEngine.OnAfterLastStepAsync()
+14:40:23 DEBUG Expressium.Coffeeshop.Web.API.Tests.BaseTestFixture #    at Reqnroll.TestRunner.CollectScenarioErrorsAsync()
+14:40:23 DEBUG Expressium.Coffeeshop.Web.API.Tests.BaseTestFixture #    at Expressium.Coffeeshop.Web.API.Tests.Features.RegistrationFeature.ScenarioCleanupAsync()
+14:40:23 DEBUG Expressium.Coffeeshop.Web.API.Tests.BaseTestFixture #    at Expressium.Coffeeshop.Web.API.Tests.Features.RegistrationFeature.SuccessfulCancelingARegistrationInquiry() in C:\Company\Source\Expressium.LivingDoc\Expressium.Coffeeshop.Web.API.Tests\Features\Registration.feature:line 15
+14:40:23 DEBUG Expressium.Coffeeshop.Web.API.Tests.BaseTestFixture #    at NUnit.Framework.Internal.TaskAwaitAdapter.GenericAdapter`1.GetResult()
+14:40:23 DEBUG Expressium.Coffeeshop.Web.API.Tests.BaseTestFixture #    at NUnit.Framework.Internal.AsyncToSyncAdapter.Await[TResult](TestExecutionContext context, Func`1 invoke)
+14:40:23 DEBUG Expressium.Coffeeshop.Web.API.Tests.BaseTestFixture #    at NUnit.Framework.Internal.AsyncToSyncAdapter.Await(TestExecutionContext context, Func`1 invoke)
+14:40:23 DEBUG Expressium.Coffeeshop.Web.API.Tests.BaseTestFixture #    at NUnit.Framework.Internal.Commands.TestMethodCommand.RunTestMethod(TestExecutionContext context)
+14:40:23 DEBUG Expressium.Coffeeshop.Web.API.Tests.BaseTestFixture #    at NUnit.Framework.Internal.Commands.TestMethodCommand.Execute(TestExecutionContext context)
+14:40:23 DEBUG Expressium.Coffeeshop.Web.API.Tests.BaseTestFixture #    at NUnit.Framework.Internal.Commands.BeforeAndAfterTestCommand.<>c__DisplayClass1_0.<Execute>b__0()
+14:40:23 DEBUG Expressium.Coffeeshop.Web.API.Tests.BaseTestFixture #    at NUnit.Framework.Internal.Commands.DelegatingTestCommand.RunTestMethodInThreadAbortSafeZone(TestExecutionContext context, Action action)
+14:40:23 INFO Expressium.Coffeeshop.Web.API.Tests.BaseTestFixture # Number of passed tests: 0
+14:40:23 INFO Expressium.Coffeeshop.Web.API.Tests.BaseTestFixture # Number of skipped tests: 0
+14:40:23 INFO Expressium.Coffeeshop.Web.API.Tests.BaseTestFixture # Number of inconclusive tests: 0
+14:40:23 INFO Expressium.Coffeeshop.Web.API.Tests.BaseTestFixture # Number of failed tests: 1
+14:40:23 INFO Expressium.Coffeeshop.Web.API.Tests.BaseTestFixture # Testcase has failed during execution...
+

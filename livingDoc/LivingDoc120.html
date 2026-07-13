@@ -1,0 +1,3442 @@
+<!DOCTYPE html>
+<html lang="en">
+	<!-- Expressium LivingDoc Version: 1.2.0.0 -->
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Expressium LivingDoc</title>
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+		<style>
+    @property --passed-color {
+        syntax: "<color>";
+        inherits: false;
+        initial-value: #48A84F;
+    }
+
+    @property --incomplete-color {
+        syntax: "<color>";
+        inherits: false;
+        initial-value: #F5BB00;
+    }
+
+    @property --failed-color {
+        syntax: "<color>";
+        inherits: false;
+        initial-value: #EB4431;
+    }
+
+    @property --skipped-color {
+        syntax: "<color>";
+        inherits: false;
+        initial-value: #A9A9A9;
+    }
+
+    @property --total-color {
+        syntax: "<color>";
+        inherits: false;
+        initial-value: black;
+    }
+
+    @property --passed-background-color {
+        syntax: "<color>";
+        inherits: false;
+        initial-value: #E5F4E6;
+    }
+
+    @property --incomplete-background-color {
+        syntax: "<color>";
+        inherits: false;
+        initial-value: #FFF6D6;
+    }
+
+    @property --failed-background-color {
+        syntax: "<color>";
+        inherits: false;
+        initial-value: #FBE6E3;
+    }
+
+    @property --skipped-background-color {
+        syntax: "<color>";
+        inherits: false;
+        initial-value: #F0F0F0;
+    }
+
+    @property --passed-text-color {
+        syntax: "<color>";
+        inherits: false;
+        initial-value: #2B672F;
+    }
+
+    @property --incomplete-text-color {
+        syntax: "<color>";
+        inherits: false;
+        initial-value: #7A5E00;
+    }
+
+    @property --failed-text-color {
+        syntax: "<color>";
+        inherits: false;
+        initial-value: #99271E;
+    }
+
+    @property --skipped-text-color {
+        syntax: "<color>";
+        inherits: false;
+        initial-value: #000000;
+    }
+
+    @property --keyword-color {
+        syntax: "<color>";
+        inherits: false;
+        initial-value: #2F6795;
+        initial-value: #2D638F;
+    }
+
+    @property --hover-color {
+        syntax: "<color>";
+        inherits: false;
+        initial-value: #C7D9E9;
+        initial-value: #d9e5f0;
+    }
+
+    @property --darkgray-color {
+        syntax: "<color>";
+        inherits: false;
+        initial-value: #787878;
+        initial-value: #707070;
+    }
+
+    @property --lightgray-color {
+        syntax: "<color>";
+        inherits: false;
+        initial-value: gray;
+        initial-value: #707070;
+    }
+    
+    body, html {
+        height: 100%;
+        margin: 0;
+        overflow: hidden;
+        /* font-family: system-ui, "Segoe UI Variable Small", "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", "Liberation Sans", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"; */
+    }
+
+    #content-wrapper {
+        display: flex;
+        height: calc(100% - 156px); /* Adjust for header and footer height */
+        flex-direction: row; /* Change to row for vertical splitter */
+    }
+
+    #splitter {
+        width: 2px;
+        background: #ddd;
+        cursor: col-resize;
+    }
+
+    #left-section {
+        flex: 1;
+        overflow: hidden;
+        scrollbar-color: #909090 #F8F9FA;
+    }
+
+    #right-section {
+        flex: 1;
+        overflow: auto;
+        scrollbar-color: #909090 #F8F9FA;
+    }
+
+    #list-view {
+        flex: 1;
+        overflow: auto;
+        height: calc(100% - 68px); /* Adjust for filter and search height */
+    }
+
+    header {
+        padding: 8px;
+        padding-left: 16px;
+        background-color: #C7D9E9;
+    }
+
+    footer {
+        background-color: #f1f1f1;
+        color: #555;
+        text-align: center;
+        padding: 10px;
+        font-size: 0.875em;
+    }
+
+    .navigation {
+        background-color: var(--darkgray-color);
+        color: white;
+        padding: 8px 16px;
+    }
+
+    a.navigation-link {
+        color: white;
+        position: relative;
+        padding-left: 1px;
+        padding-right: 1px;
+    }
+
+    a.navigation-active {
+        font-weight: 600;
+        font-size: 1.0625em;
+    }
+
+    .section {
+        padding-bottom: 8px;
+    }
+
+    .layout-row {
+        display: flex;
+        width: 100%;
+    }
+
+    .layout-column {
+        flex: auto;
+    }
+
+    .align-left {
+        text-align: left;
+    }
+
+    .align-center {
+        text-align: center;
+    }
+
+    .align-right {
+        text-align: right;
+    }
+
+    .filter-group {
+        background-color: #f1f1f1;
+        padding: 8px;
+        align-items: center;
+    }
+
+    .filter-group-text {
+        padding-left: 4px;
+        padding-right: 6px;
+        color: var(--lightgray-color);
+    }
+
+    .filter-group-input {
+        width: 100%;
+        box-sizing: border-box;
+        border-width: 1px;
+        outline: none;
+        background-color: #f1f1f1;
+        border: hidden;
+    }
+
+    th, td {
+        padding-left: 4px;
+        padding-right: 4px;
+        padding-top: 3px;
+        padding-bottom: 3px;
+    }
+
+    th {
+        background-color: var(--darkgray-color);
+        color: white;
+        border: solid;
+        border-width: 1px;
+        font-weight: 600;
+    }
+
+    table.grid-view,
+    table.tree-view {
+        border: 1px;
+        width: 100%;
+    }
+
+    table.grid-view tr:hover,
+    table.tree-view tr:hover {
+        background-color: var(--hover-color);
+    }
+
+    table.grid-view th,
+    table.grid-view td {
+        padding-left: 6px;
+        padding-right: 6px;
+    }
+
+    table.tree-view th,
+    table.tree-view td {
+        padding-left: 2px;
+        padding-right: 4px;
+    }
+
+    .grid-folder {
+        font-size: 0.9375em;
+        padding: 2px;
+        text-align: center;
+    }
+
+    button {
+        border: 1px solid black;
+        color: black;
+    }
+
+    button.prefilter {
+        border: 1px solid var(--lightgray-color);
+        color: var(--lightgray-color);
+    }
+
+    button.prefilter:hover {
+        border: 1px solid black;
+        color: black;
+        background-color: var(--hover-color);
+    }
+
+    button.prefilter.active {
+        border: 1px solid black;
+        color: black;
+        background-color: var(--hover-color);
+    }
+
+    .grid-option {
+        color: dimgray;
+    }
+
+    .gridline {
+        border-bottom: 1px solid lightgray;
+    }
+
+    .gridline-folder {
+        color: var(--darkgray-color);
+        font-weight: bold;
+    }
+
+    .gridline-heading {
+        color: var(--keyword-color);
+        font-weight: normal;
+    }
+
+    .gridline-toggle {
+        color: dimgray;
+        cursor: pointer;
+        text-align: center;
+    }
+
+    .project-name {
+        font-size: 1.40em;
+        font-weight: bold;
+    }
+
+    .project-date {
+        color: dimgray;
+        padding-left: 2px;
+    }
+
+    .page-name {
+        font-size: 1.40em;
+        font-weight: bold;
+        line-height: 1;
+        color: dimgray;
+    }
+
+    .chart-outline {
+        width: fit-content;
+        margin: auto;
+        padding: 16px;
+        padding-left: 24px;
+        padding-right: 24px;
+        background-color: whitesmoke;
+    }
+
+    .chart-name {
+        font-size: 1.25em;
+        font-weight: bold;
+        line-height: 1;
+        color: dimgray;
+    }
+
+    .chart-percentage {
+        font-size: 2.25em;
+        line-height: 1.0;
+    }
+
+    .chart-status {
+        font-size: 2em;
+        color: var(--lightgray-color);
+        line-height: 1.0;
+    }
+
+    .chart-bar {
+        height: 0.8em;
+        float: left
+    }
+
+    .chart-count {
+        text-align: center;
+    }
+
+    .chart-count-number {
+        font-size: 1.25em;
+        line-height: 1.0;
+    }
+
+    .chart-count-percentage {
+        font-size: 1.125em;
+        line-height: 1.0;
+    }
+
+    .chart-count-status {
+        font-size: 1.125em;
+        line-height: 1.0;
+    }
+
+    .chart-count-bar {
+        width: 110px;
+        height: 0.4em;
+    }
+
+    data-item {
+        visibility: hidden;
+    }
+
+    a {
+        color: var(--keyword-color);
+        text-decoration: none;
+    }
+
+    .color-passed {
+        color: var(--passed-color);
+    }
+
+    .bgcolor-passed {
+        background: var(--passed-color);
+    }
+
+    .color-incomplete {
+        color: var(--incomplete-color);
+    }
+
+    .bgcolor-incomplete {
+        background: var(--incomplete-color);
+    }
+
+    .color-failed {
+        color: var(--failed-color);
+    }
+
+    .bgcolor-failed {
+        background: var(--failed-color);
+    }
+
+    .color-skipped {
+        color: var(--skipped-color);
+    }
+
+    .bgcolor-skipped {
+        background: var(--skipped-color);
+    }
+
+    .bgcolor-total {
+        background: var(--total-color);
+    }
+
+    .status-dot {
+        height: 10px;
+        width: 10px;
+        border-radius: 50%;
+        display: inline-block;
+        margin-left: 2px;
+        margin-right: 2px;
+    }
+
+    .sort-column {
+        float: right;
+        font-weight: normal;
+    }
+
+    ul {
+        list-style-type: none;
+        margin-bottom: 0px;
+    }
+
+    .chart-text {
+        transform: translateY(0.15em);
+    }
+
+    .chart-number {
+        font-size: 0.5em;
+        text-anchor: middle;
+        transform: translateY(-0.25em);
+    }
+
+    .chart-label {
+        font-size: 0.3em;
+        text-anchor: middle;
+        transform: translateY(0.7em);
+    }
+
+    .donut-segment-passed {
+        stroke: var(--passed-color);
+        fill: transparent;
+        stroke-width: 3.2px;
+    }
+
+    .donut-segment-incomplete {
+        stroke: var(--incomplete-color);
+        fill: transparent;
+        stroke-width: 3.2px;
+    }
+
+    .donut-segment-failed {
+        stroke: var(--failed-color);
+        fill: transparent;
+        stroke-width: 3.2px;
+    }
+
+    .donut-segment-skipped {
+        stroke: var(--skipped-color);
+        fill: transparent;
+        stroke-width: 3.2px;
+    }
+
+    textarea {
+        resize: none;
+        width: 100%;
+        padding: 8px;
+        border: 1px solid dimgray;
+    }
+
+    textarea:focus {
+        border-color: black;
+        outline: none;
+    }
+
+    hr {
+        border: 0 none;
+        margin-top: 6px;
+        margin-bottom: 6px;
+    }
+
+    .circle-number {
+        width: 1.5em;
+        height: 1.5em;
+        border-radius: 50%;
+        background-color: #909090;
+        color: white;
+        text-align: center;
+        line-height: 1.5em; /* Centers the text vertically */
+        font-size: 0.875em;
+        display: inline-block; /* Allows the circle to be displayed inline */
+        margin-left: 2px;
+    }
+
+    .feature-tags,
+    .rule-tags,
+    .scenario-tags {
+        color: #348F91;
+    }
+
+    .feature-keyword,
+    .background-keyword,
+    .rule-keyword,
+    .scenario-keyword {
+        color: var(--keyword-color);
+        font-weight: bold;
+    }
+
+    .feature-name,
+    .rule-name,
+    .scenario-name {
+        font-weight: bold;
+    }
+
+    .feature-description,
+    .rule-description,
+    .scenario-description {
+        font-family: Consolas;
+        font-size: 0.875em;
+        color: var(--lightgray-color);
+        font-style: italic;
+        padding-top: 2px;
+    }
+
+    .feature-duration,
+    .scenario-duration {
+        color: var(--lightgray-color);
+        padding-left: 4px;
+        padding-right: 4px;
+    }
+
+    .scenario-stacktraces,
+    .scenario-attachments {
+        color: dimgray;
+        /* padding: 2px; */
+        /* background-color: #F0F0F0; */
+        /* text-align: center; */
+        /* border-radius: 4px;  */
+        /* border: 1px solid lightgray; */
+    }
+
+    .step-marker {
+        font-weight: bold;
+        text-align: center;
+    }
+
+    .step-keyword {
+        color: var(--keyword-color);
+        font-weight: bold;
+    }
+
+    .scenario-steps {
+        padding-top: 2px;
+        padding-bottom: 2px;
+    }
+
+    ul.scenario-steps li {
+        padding-top: 2px;
+        padding-bottom: 2px;
+    }
+
+    .steps-datatable {
+        padding-left: 32px;
+    }
+
+    .scenario-datatable {
+        color: dimgray;
+    }
+
+    table.scenario-datatable td {
+        padding-top: 1px;
+        padding-bottom: 1px;
+        padding-left: 4px;
+        padding-right: 4px;
+    }
+
+    .message-box {
+        padding-top: 4px;
+        padding-bottom: 4px;
+        padding-left: 2px;
+        padding-right: 2px;
+        max-width: inherit;
+        word-wrap: break-word;
+    }
+
+    .message-passed {
+        color: var(--passed-text-color);
+        background-color: var(--passed-background-color);
+        padding: 8px;
+        border-left: 8px solid var(--passed-color);
+    }
+
+    .message-failed {
+        color: var(--failed-text-color);
+        background-color: var(--failed-background-color);
+        padding: 8px;
+        border-left: 8px solid var(--failed-color);
+    }
+
+    .message-incomplete {
+        color: var(--incomplete-text-color);
+        background-color: var(--incomplete-background-color);
+        padding: 8px;
+        border-left: 8px solid var(--incomplete-color);
+    }
+
+    .message-skipped {
+        color: var(--skipped-text-color);
+        background-color: var(--skipped-background-color);
+        padding: 8px;
+        border-left: 8px solid var(--skipped-color);
+    }
+
+    .message-stacktrace {
+        font-size: 0.875em;
+    }
+
+    .examples-keyword {
+        font-weight: bold;
+        color: var(--lightgray-color);
+        padding-left: 16px;
+    }
+
+    .examples-name {
+        color: var(--lightgray-color);
+    }
+
+    .examples-description {
+        font-family: Consolas;
+        font-size: 0.875em;
+        color: var(--lightgray-color);
+        font-style: italic;
+        padding-left: 32px;
+    }
+
+    .examples-datatable {
+        padding-left: 32px;
+    }
+
+    .attachments {
+        padding-top: 4px;
+    }
+
+    .attachments-keyword {
+        font-weight: bold;
+        color: var(--lightgray-color);
+        padding-left: 16px;
+    }
+
+    ul.attachments-files li {
+        padding-top: 1px;
+        padding-bottom: 1px;
+    }
+
+    #script-view {
+        flex: 1;
+        overflow: auto;
+        height: calc(100% - 334px); /* Adjust for filter and search height */
+    }
+
+    #scenario-script {
+        field-sizing: content;
+        height: 96%;
+    }
+
+    .duration-icon {
+        color: dimgray;
+        font-size: 2.5em;
+    }
+
+    .duration-text {
+        font-size: 1.25em;
+        padding-left: 8px;
+        padding-top: 4px;
+    }
+
+    .duration-keyword {
+        color: dimgray;
+    }
+
+		</style>
+		<script>
+        function loadScenario(x) {
+            var featureId = x.getAttribute('data-featureid');
+            var scenarioId = x.getAttribute('data-scenarioid');
+            var feature = document.getElementById(featureId).innerHTML;
+            var scenario = document.getElementById(scenarioId).innerHTML;
+
+            document.getElementById('right-section').innerHTML = feature + scenario;
+        }
+    
+		</script>
+		<script>
+        function loadFeature(x) {
+            var featureId = x.getAttribute('data-featureid');
+            var feature = document.getElementById(featureId).innerHTML;
+            var table = document.getElementById("project-view");
+            var tr = table.getElementsByTagName("tr");
+
+            for (var i = 0; i < tr.length; i++) {
+                var role = tr[i].getAttribute("data-role");
+
+                if (role == "scenario") {
+                    var parentId = tr[i].getAttribute('data-featureid');
+                    if (featureId == parentId) {
+                        var scenarioId = tr[i].getAttribute('data-scenarioid');
+                        feature = feature.concat(document.getElementById(scenarioId).innerHTML);
+                    }
+                }
+            }
+
+            document.getElementById('right-section').innerHTML = feature;
+
+            var rules = document.getElementById('right-section').querySelectorAll('[data-rule-replica]');
+            for (var i = 0; i < rules.length; i++)
+                rules[i].style.display = "none";
+        }
+    
+		</script>
+		<script>
+        function loadViewMode(x, y) {
+            var listview = document.getElementById(x).innerHTML;
+
+            document.getElementById('list-view').innerHTML = listview;
+
+            var exists = document.getElementById('view-title');
+            if (exists)
+                document.getElementById('view-title').innerHTML = y;
+
+            var navLinks = document.querySelectorAll('.navigation-link');
+            for (var i = 0; i < navLinks.length; i++) {
+                if (navLinks[i].textContent == y)
+                    navLinks[i].classList.add('navigation-active');
+                else
+                    navLinks[i].classList.remove('navigation-active');
+            }
+
+            filterView();
+            loadAnalytics();
+        }
+    
+		</script>
+		<script>
+        function loadAnalytics() {
+            var navLinkActive = document.querySelectorAll('a.navigation-link.navigation-active');
+            if (navLinkActive.length > 0) {
+                var name = navLinkActive[0].textContent.toLowerCase();
+
+                if (name == "overview") {
+                    var analytics = document.getElementById("analytics-scenarios").innerHTML;
+                    document.getElementById('right-section').innerHTML = analytics;
+                } else {
+                    var analytics = document.getElementById("analytics-" + name).innerHTML;
+                    document.getElementById('right-section').innerHTML = analytics;
+                }
+            }
+            else {
+                var analytics = document.getElementById("analytics-scenarios").innerHTML;
+                document.getElementById('right-section').innerHTML = analytics;
+            }
+        }
+    
+		</script>
+		<script>
+        function filterView() {
+            var navLinkActive = document.querySelectorAll('a.navigation-link.navigation-active');
+            if (navLinkActive.length > 0) {
+                name = navLinkActive[0].textContent.toLowerCase();
+
+                if (name == "overview") {
+                    filterDataByRole("scenario");
+                    filterDataFeatures();
+                    filterDataFolders();
+                }
+                else if (name == "features") {
+                    filterDataByRole("feature");
+                }
+                else if (name == "scenarios") {
+                    filterDataByRole("scenario");
+                }
+                else if (name == "steps") {
+                    filterDataByRole("step");
+                }
+                else {
+                }
+            }
+        }
+    
+		</script>
+		<script>
+        function filterDataByRole(roleType) {
+            var input = document.getElementById("filter-by-keywords");
+            var filterTokens = input.value.toUpperCase().split(/\s+/);
+            var table = document.getElementById("table-list");
+            var tr = table.getElementsByTagName("tr");
+
+            var statuses = [];
+            var prefilters = document.getElementsByTagName("button");
+            for (var i = 0; i < prefilters.length; i++) {
+                var prefilter = prefilters[i].getAttribute("data-prefilter");
+                var active = prefilters[i].className.includes(" active");
+                if (active) {
+                    statuses.push(prefilter);
+                }
+            }
+
+            for (var i = 0; i < tr.length; i++) {
+                var role = tr[i].getAttribute("data-role");
+                var tags = tr[i].getAttribute("data-tags");
+                var td = tr[i].getElementsByTagName("td");
+                var rowText = "";
+                var found = false;
+
+                if (role == null)
+                    continue;
+
+                if (role != roleType)
+                    continue;
+
+                for (var j = 0; j < td.length; j++) {
+                    rowText += td[j].textContent.toUpperCase() + " ";
+                }
+
+                var tagTokens = tags.toUpperCase().split(/\s+/);
+                for (var t = 0; t < tagTokens.length; t++) {
+                    rowText += tagTokens[t].toUpperCase() + " ";
+                }
+
+                found = filterTokens.every(token => rowText.includes(token));
+
+                var hasPrefilter = false;
+                for (var t = 0; t < statuses.length; t++) {
+                    var prefilter = statuses[t];
+                    if (rowText.includes(prefilter.toUpperCase())) {
+                        hasPrefilter = true;
+                    }
+                }
+
+                if (statuses.length > 0 && !hasPrefilter) {
+                    found = false;
+                }
+
+                tr[i].style.display = found ? "" : "none";
+            }
+        }
+    
+		</script>
+		<script>
+        function filterDataFeatures() {
+            var table = document.getElementById("table-list");
+            var tr = table.getElementsByTagName("tr");
+
+            // Hide all features first
+            for (var i = 0; i < tr.length; i++) {
+                var role = tr[i].getAttribute("data-role");
+
+                if (role == "feature")
+                    tr[i].style.display = "none";
+            }
+
+            var features = [];
+
+            // Collect all features that have visible scenarios
+            for (var i = 0; i < tr.length; i++) {
+                var role = tr[i].getAttribute("data-role");
+
+                if (role == "scenario") {
+                    if (tr[i].style.display == "") {
+                        var parent = tr[i].getAttribute("data-parent");
+                        features.push(parent);
+                    }
+                }
+            }
+
+            // Show features that have visible scenarios
+            for (var i = 0; i < tr.length; i++) {
+                var role = tr[i].getAttribute("data-role");
+
+                if (role == "feature") {
+                    var name = tr[i].getAttribute("data-name");
+                    if (features.includes(name))
+                        tr[i].style.display = "";
+                }
+            }
+
+            // Collapse scenarios under features if the feature is collapsed
+            for (var i = 0; i < tr.length; i++) {
+                var role = tr[i].getAttribute("data-role");
+                if (role == "feature") {
+                    if (tr[i].style.display == "") {
+                        var featureId = tr[i].getAttribute('data-featureid');
+                        var collapse = tr[i].getAttribute('data-collapse');
+                        if (collapse == "true") {
+                            for (var g = 0; g < tr.length; g++) {
+                                var scenarioRole = tr[g].getAttribute("data-role");
+                                if (scenarioRole == "scenario") {
+                                    var featureIdSlave = tr[g].getAttribute('data-featureid');
+                                    if (featureId == featureIdSlave) {
+                                        tr[g].style.display = "none";
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    
+		</script>
+		<script>
+        function filterDataFolders() {
+            var table = document.getElementById("table-list");
+            var tr = table.getElementsByTagName("tr");
+
+            var features = table.querySelectorAll('[data-role="feature"]');
+
+            // Display all folder first and reset attributes
+            for (var i = 0; i < tr.length; i++) {
+                var role = tr[i].getAttribute("data-role");
+
+                if (role == "folder") {
+                    tr[i].style.display = "";
+                    tr[i].setAttribute('has-folders', 'false');
+                    tr[i].setAttribute('has-features', 'false');
+                }
+            }
+
+            var foldersDataParents = [];
+
+            // Collect all folders that have visible features
+            for (var i = 0; i < features.length; i++) {
+                if (features[i].style.display == "") {
+                    var parent = features[i].getAttribute("data-parent");
+                    foldersDataParents.push(parent);
+                }
+            }
+
+            // Set folders that have visible features
+            for (var i = 0; i < tr.length; i++) {
+                var role = tr[i].getAttribute("data-role");
+
+                if (role == "folder") {
+                    var name = tr[i].getAttribute("data-name");
+                    if (foldersDataParents.includes(name))
+                        tr[i].setAttribute('has-features', 'true');
+                }
+            }
+
+            // Set folders that have subsequent folders
+            for (var i = 0; i < tr.length; i++) {
+                var role = tr[i].getAttribute("data-role");
+
+                if (role == "folder") {
+                    var folderPath = tr[i].getAttribute('data-name');
+
+                    for (var s = 0; s < tr.length; s++) {
+                        var srole = tr[s].getAttribute("data-role");
+
+                        if (srole == "folder") {
+                            var sfolderPath = tr[s].getAttribute('data-name');
+                            if (sfolderPath != folderPath) {
+                                if (sfolderPath.startsWith(folderPath)) {
+                                    tr[i].setAttribute('has-folders', 'true');
+                                }
+                            }
+                        }                       
+                    }
+                }
+            }
+
+            // Hide folders that have invisible folders and features
+            for (var i = 0; i < tr.length; i++) {
+                var role = tr[i].getAttribute("data-role");
+
+                if (role == "folder") {
+                    var hasFolders = tr[i].getAttribute('has-folders');
+                    var hasFeatures = tr[i].getAttribute('has-features');
+                    if (hasFolders == "false" && hasFeatures == "false")
+                        tr[i].style.display = "none";
+                }
+            }
+
+            // Hide folders that have no visible subfolders
+            filterSubFolder(tr);
+            filterSubFolder(tr);
+        }
+    
+		</script>
+		<script>
+        function filterSubFolder(tr) {
+            for (var i = 0; i < tr.length; i++) {
+                var role = tr[i].getAttribute("data-role");
+                if (role == "folder") {
+                    var hasFolders = tr[i].getAttribute('has-folders');
+                    var hasFeatures = tr[i].getAttribute('has-features');
+                    if (hasFolders == "true" && hasFeatures == "false") {
+                        var folderPath = tr[i].getAttribute('data-name');
+
+                        var hasVisibleSubfolders = false;
+
+                        for (var s = 0; s < tr.length; s++) {
+                            var srole = tr[s].getAttribute("data-role");
+                            if (srole == "folder") {
+                                var sfolderPath = tr[s].getAttribute('data-name');
+                                if (sfolderPath != folderPath) {
+                                    if (sfolderPath.startsWith(folderPath)) {
+                                        if (tr[s].style.display == "") {
+                                            hasVisibleSubfolders = true;
+                                        }
+                                    }
+                                }
+                            }                       
+                        }
+
+                        if (!hasVisibleSubfolders) {
+                            tr[i].style.display = "none";
+                        }
+                    }
+                }
+            }
+        }
+    
+		</script>
+		<script>
+        function sortTableByColumn(n) {
+            var table = document.getElementById("table-grid");
+            var count = 0;
+            var switching = true;
+            var direction = "ascending";
+
+            while (switching) {
+                switching = false;
+                var rows = table.rows;
+
+                for (var i = 1; i < (rows.length - 1); i++) {
+                    var Switch = false;
+
+                    var x = rows[i].getElementsByTagName("td")[n];
+                    var y = rows[i + 1].getElementsByTagName("td")[n];
+
+                    if (direction == "ascending") {
+
+                        if (x.innerHTML.toLowerCase() >
+                            y.innerHTML.toLowerCase()) {
+
+                            Switch = true;
+                            break;
+                        }
+                    } else if (direction == "descending") {
+
+                        if (x.innerHTML.toLowerCase() <
+                            y.innerHTML.toLowerCase()) {
+
+                            Switch = true;
+                            break;
+                        }
+                    }
+                }
+                if (Switch) {
+                    rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+                    switching = true;
+
+                    count++;
+                } else {
+                    if (count == 0 && direction == "ascending") {
+                        direction = "descending";
+                        switching = true;
+                    }
+                }
+            }
+        }
+    
+		</script>
+		<script>
+        function sortTableByColumnByAttibute(n, a) {
+            var table = document.getElementById("table-grid");
+            var count = 0;
+            var switching = true;
+
+            var direction = "ascending";
+
+            while (switching) {
+                switching = false;
+                var rows = table.rows;
+
+                for (var i = 1; i < (rows.length - 1); i++) {
+                    var Switch = false;
+
+                    var x = rows[i].getElementsByTagName("td")[n];
+                    var y = rows[i + 1].getElementsByTagName("td")[n];
+
+                    if (direction == "ascending") {
+
+                        if (x.getAttribute(a) >
+                            y.getAttribute(a)) {
+
+                            Switch = true;
+                            break;
+                        }
+                    } else if (direction == "descending") {
+
+                        if (x.getAttribute(a) <
+                            y.getAttribute(a)) {
+
+                            Switch = true;
+                            break;
+                        }
+                    }
+                }
+                if (Switch) {
+                    rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+                    switching = true;
+
+                    count++;
+                } else {
+                    if (count == 0 && direction == "ascending") {
+                        direction = "descending";
+                        switching = true;
+                    }
+                }
+            }
+        }
+    
+		</script>
+		<script>
+        function loadEditor() {
+            var editor = document.getElementById('editor-view').innerHTML;
+
+            document.getElementById('left-section').innerHTML = editor;
+            document.getElementById('right-section').remove();
+
+            document.getElementById("scenario-script").value = "";
+            document.getElementById("scenario-script").value += "@TA-??? @Review";
+            document.getElementById("scenario-script").value += "\nScenario: Successfully Creating a new Gherkin Script";
+
+            filterStepDefinitions();
+
+            var navLinks = document.querySelectorAll('.navigation-link');
+            for (var i = 0; i < navLinks.length; i++) {
+                if (navLinks[i].textContent == "Editor")
+                    navLinks[i].classList.add('navigation-active');
+                else
+                    navLinks[i].classList.remove('navigation-active');
+            }
+        }
+    
+		</script>
+		<script>
+        function filterStepDefinitions() {
+            var input = document.getElementById("stepdefinition-filter");
+            var filterTokens = input.value.toUpperCase().split(/\s+/);
+            var table = document.getElementById("steps-table-list");
+            var tr = table.getElementsByTagName("tr");
+
+            var numberOfFound = 0;
+
+            for (var i = 0; i < tr.length; i++) {
+                var td = tr[i].getElementsByTagName("td");
+                var rowText = "";
+                var found = false;
+
+                for (var j = 0; j < td.length; j++) {
+                    rowText += td[j].textContent.toUpperCase() + " ";
+                }
+
+                found = filterTokens.every(token => rowText.includes(token));
+
+                if (found)
+                    numberOfFound++;
+
+                if (numberOfFound >= 6)
+                    found = false;
+
+                tr[i].style.display = found ? "" : "none";
+            }
+        }
+    
+		</script>
+		<script>
+        function loadStepDefinition(row) {
+            var link = row.querySelector("td a");
+            var linkText = link.textContent || link.innerText;
+
+            var script = document.getElementById("scenario-script").value;
+            if (script.endsWith("\n") || script === "") {
+                document.getElementById("scenario-script").value += "    " + linkText;
+            } else {
+                document.getElementById("scenario-script").value += "\n    " + linkText;
+            }
+
+            document.getElementById("stepdefinition-filter").value = "";
+            filterStepDefinitions();
+        }
+    
+		</script>
+		<script>
+        function loadStepDefinitionByEnter() {
+            var table = document.getElementById("steps-table-list");
+            var tr = table.getElementsByTagName("tr");
+
+            for (var i = 0; i < tr.length; i++) {
+                if (tr[i].style.display == "") {
+                    loadStepDefinition(tr[i]);
+                    break;
+                }
+            }
+
+            document.getElementById("stepdefinition-filter").value = "";
+        }
+    
+		</script>
+		<script>
+        function editorCopy() {
+            var copyText = document.getElementById("scenario-script");
+            navigator.clipboard.writeText(copyText.value);
+        }
+    
+		</script>
+		<script>
+        function loadCollapse(x) {
+            var collapse = x.getAttribute('data-collapse');
+            var parent = x.parentElement;
+
+            if (collapse == "false") {
+                x.innerHTML = "<span class='bi bi-chevron-right'></span>";
+                x.setAttribute('data-collapse', 'true');
+                parent.setAttribute('data-collapse', 'true');
+            } else {
+                x.innerHTML = "<span class='bi bi-chevron-down'></span>";
+                x.setAttribute('data-collapse', 'false');
+                parent.setAttribute('data-collapse', 'false');
+            }
+
+            filterView();
+        }
+    
+		</script>
+		<script>
+        function loadCollapseAll() {
+            var table = document.getElementById("table-list");
+            var tr = table.getElementsByTagName("tr");
+
+            for (var i = 0; i < tr.length; i++) {
+                var role = tr[i].getAttribute("data-role");
+
+                if (role == "feature") {
+                    var cells = tr[i].getElementsByTagName("td");
+
+                    for (var a = 0; a < cells.length; a++) {
+                        var collapse = cells[a].getAttribute('data-collapse');
+
+                        if (collapse == "false") {
+                            cells[a].innerHTML = "<span class='bi bi-chevron-right'></span>";
+                            cells[a].setAttribute('data-collapse', 'true');
+                            tr[i].setAttribute('data-collapse', 'true');
+                        }
+                    }
+                }
+            }
+
+            filterView();
+        }
+    
+		</script>
+		<script>
+        function loadExpandAll() {
+            var table = document.getElementById("table-list");
+            var tr = table.getElementsByTagName("tr");
+
+            for (var i = 0; i < tr.length; i++) {
+                var role = tr[i].getAttribute("data-role");
+
+                if (role == "feature") {
+                    var cells = tr[i].getElementsByTagName("td");
+
+                    for (var a = 0; a < cells.length; a++) {
+                        var collapse = cells[a].getAttribute('data-collapse');
+
+                        if (collapse == "true") {
+                            cells[a].innerHTML = "<span class='bi bi-chevron-down'></span>";
+                            cells[a].setAttribute('data-collapse', 'false');
+                            tr[i].setAttribute('data-collapse', 'false');
+                        }
+                    }
+                }
+            }
+
+            filterView();
+        }
+    
+		</script>
+		<script>
+        function togglePrefilter(x) {
+            var attribute = x.className;
+
+            if (attribute.includes(" active")) {
+                x.className = x.className.replace(" active", "");
+            } else {
+                x.className += " active";
+            }
+
+            filterView();
+        }
+    
+		</script>
+		<script>
+        function clearPrefilters() {
+            var prefilters = document.getElementsByTagName("button");
+            for (var i = 0; i < prefilters.length; i++) {
+                var prefilter = prefilters[i].getAttribute("data-prefilter");
+                var active = prefilters[i].className.includes(" active");
+                if (active) {
+                    prefilters[i].className = prefilters[i].className.replace(" active", "");
+                }
+            }
+
+            var input = document.getElementById("filter-by-keywords");
+            input.value = '';
+
+            filterView();
+        }
+    
+		</script>
+		<script>
+        function toggleAttachments(x) {
+            var grandParent = x.parentElement?.parentElement;
+            if (!grandParent) return;
+
+            var attachments = grandParent.getElementsByClassName('attachments');
+            for (var i = 0; i < attachments.length; i++) {
+                if (attachments[i].style.display === "none") {
+                    attachments[i].style.display = "block";
+                } else {
+                    attachments[i].style.display = "none";
+                }
+            }
+        }
+    
+		</script>
+		<script>
+        function toggleStacktraces(x) {
+            var grandParent = x.parentElement?.parentElement;
+            if (!grandParent) return;
+
+            var stacktraces = grandParent.getElementsByClassName('stacktraces');
+            for (var i = 0; i < stacktraces.length; i++) {
+                if (stacktraces[i].style.display === "none") {
+                    stacktraces[i].style.display = "block";
+                } else {
+                    stacktraces[i].style.display = "none";
+                }
+            }
+        }
+    
+		</script>
+		<script>
+        function editorCopy() {
+            var textArea = document.getElementById("scenario-script");
+            textArea.select();
+            navigator.clipboard.writeText(textArea.value);
+            window.getSelection().removeAllRanges();
+        }
+    
+		</script>
+		<script>
+        function onloadFilter() {
+            const viewMode = new URLSearchParams(window.location.search).get('viewMode');
+            if (viewMode == "Editor") { 
+                loadEditor();
+                return;
+            }
+
+            const filter = new URLSearchParams(window.location.search).get('filterByKeywords');
+            if (!filter) 
+                return;
+
+            var input = document.getElementById("filter-by-keywords");
+            if (input) {
+                input.value = filter;
+                filterView();
+
+                var table = document.getElementById("table-list");
+                var tr = table.getElementsByTagName("tr");
+
+                for (var i = 0; i < tr.length; i++) {
+                    var role = tr[i].getAttribute("data-role");
+                    if (role == "scenario") {
+                        if (tr[i].style.display == "") {
+                            var featureId = tr[i].getAttribute('data-featureid');
+                            var scenarioId = tr[i].getAttribute('data-scenarioid');
+                            var feature = document.getElementById(featureId).innerHTML;
+                            var scenario = document.getElementById(scenarioId).innerHTML;
+
+                            document.getElementById('right-section').innerHTML = feature + scenario;
+
+                            break;
+                        }
+                    }
+                }
+            }
+
+            window.history.replaceState({}, document.title, window.location.pathname);
+        }
+    
+		</script>
+		<script>
+      document.addEventListener("keydown", function (event) {
+        if (event.ctrlKey && event.shiftKey && event.key.toLowerCase() === "e") {
+          event.preventDefault();
+
+          const url = new URL(window.location.href);
+          url.searchParams.set("viewMode", "Editor");
+
+          window.open(
+            url.toString(),
+            "newwindow",
+            "width=700,height=700,left=100,top=100"
+          );
+        }
+      });
+    
+		</script>
+	</head>
+	<body onload="loadViewMode('project-view','Overview'); loadAnalytics(); onloadFilter()">
+		
+		<!-- Header Section -->
+		<header>
+			<span class="project-name">Expressium.Coffeeshop.Web.API.Tests</span>
+			<br>
+			<span class="project-date">Generated Thu 4 Sep 2025 10:32:39 GMT+2</span>
+		</header>
+		
+		<!-- Project Navigation Section -->
+		<nav class="navigation">
+			<span>|</span>
+			<a class="navigation-link" title="Overview" href="#" onclick="loadViewMode('project-view','Overview');">Overview</a>
+			<span>|</span>
+			<a class="navigation-link" title="Features List View" href="#" onclick="loadViewMode('features-view','Features');">Features</a>
+			<span>|</span>
+			<a class="navigation-link" title="Scenarios List View" href="#" onclick="loadViewMode('scenarios-view','Scenarios');">Scenarios</a>
+			<span>|</span>
+			<a class="navigation-link" title="Steps List View" href="#" onclick="loadViewMode('steps-view','Steps');">Steps</a>
+			<span>|</span>
+			<a class="navigation-link" title="Analytics" href="#" onclick="loadAnalytics()">Analytics</a>
+			<span>|</span>
+		</nav>
+		
+		<!-- Content Wrapper Section -->
+		<div id="content-wrapper">
+			
+			<!-- Left Content Section -->
+			<div id="left-section" class="bg-light p-3">
+				<div class="section layout-row">
+					
+					<!-- View Title Section -->
+					<div class="layout-column align-left">
+						<span id="view-title" class="page-name">Overview</span>
+					</div>
+					
+					<!-- PreFilters Section -->
+					<div class="layout-column align-right">
+						<button class="prefilter" data-prefilter="Passed" title="Preset Filter with Passed" onclick="togglePrefilter(this)">Passed</button>
+						<button class="prefilter" data-prefilter="Incomplete" title="Preset Filter with Incomplete" onclick="togglePrefilter(this)">Incomplete</button>
+						<button class="prefilter" data-prefilter="Failed" title="Preset Filter with Failed" onclick="togglePrefilter(this)">Failed</button>
+						<button class="prefilter" data-prefilter="Skipped" title="Preset Filter with Skipped" onclick="togglePrefilter(this)">Skipped</button>
+						<button title="Clear Filters" onclick="clearPrefilters()">Clear</button>
+					</div>
+				</div>
+				
+				<!-- Filter Section -->
+				<div class="section">
+					<div class="layout-row filter-group">
+						<div class="filter-group-text">
+							<span class="bi bi-search"></span>
+						</div>
+						<div style="width: 100%">
+							<input onkeyup="filterView()" class="filter-group-input" id="filter-by-keywords" type="text" placeholder="Filter by Keywords">
+						</div>
+					</div>
+				</div>
+				<div id="list-view"></div>
+			</div>
+			
+			<!-- Splitter Content Section -->
+			<div id="splitter"></div>
+			
+			<!-- Right Content Section -->
+			<div id="right-section" class="bg-light p-3">
+			</div>
+		</div>
+		
+		<!-- Content Splitter Script -->
+		<script>
+        const splitter = document.getElementById('splitter');
+        const leftSection = document.getElementById('left-section');
+        const rightSection = document.getElementById('right-section');
+
+        let isDragging = false;
+
+        splitter.addEventListener('mousedown', (e) => {
+            isDragging = true;
+            document.body.style.cursor = 'col-resize';
+        });
+
+        document.addEventListener('mousemove', (e) => {
+            if (!isDragging) return;
+
+            document.body.style.userSelect = 'none';
+
+            const totalWidth = leftSection.offsetWidth + rightSection.offsetWidth + splitter.offsetWidth;
+            const leftWidth = e.clientX - leftSection.getBoundingClientRect().left;
+
+            if (leftWidth > 50 && leftWidth < totalWidth - 50) {
+                leftSection.style.flex = `0 0 ${leftWidth}px`;
+                rightSection.style.flex = `1 1 auto`;
+            }
+        });
+
+        document.addEventListener('mouseup', () => {
+            isDragging = false;
+            document.body.style.cursor = 'default';
+            document.body.style.userSelect = '';
+        });
+    
+		</script>
+		
+		<!-- Footer Section -->
+		<footer>
+			©2026 Expressium All Rights Reserved
+		</footer>
+		<data style="display: none;">
+			
+			<!-- Data Overview -->
+			<div class="data-item" id="project-view">
+				<div class="section">
+					<table id="table-grid" class="tree-view">
+						<tbody id="table-list">
+							<tr>
+								<td class="grid-folder" width="16">📂</td>
+								<td class="gridline" colspan="9">
+									<span class="gridline-folder">Expressium.Coffeeshop.Web.API.Tests</span>
+								</td>
+								<td class="gridline" style="padding-right: 8px;" colspan="2" align="right">
+									<a class="grid-option bi bi-plus-lg" title="Expand All Features" href="#" onclick="loadExpandAll()"></a>
+									<a class="grid-option bi bi-dash-lg" title="Collapse All Features" href="#" onclick="loadCollapseAll()"></a>
+								</td>
+							</tr>
+							<tr data-name="Features" data-role="folder">
+								<td></td>
+								<td class="grid-folder" width="16">📂</td>
+								<td class="gridline" colspan="9">
+									<span class="gridline-folder">Features</span>
+								</td>
+								<td class="gridline" align="right"></td>
+							</tr>
+							<tr data-name="Features\Authentication" data-role="folder">
+								<td></td>
+								<td></td>
+								<td class="grid-folder" width="16">📂</td>
+								<td class="gridline" colspan="8">
+									<span class="gridline-folder">Authentication</span>
+								</td>
+								<td class="gridline" align="right"></td>
+							</tr>
+							<tr data-parent="Features\Authentication" data-name="94dbf979-41d6-4234-8642-fd382888bdd1" data-role="feature" data-featureid="94dbf979-41d6-4234-8642-fd382888bdd1" onclick="loadFeature(this);">
+								<td></td>
+								<td></td>
+								<td></td>
+								<td data-collapse="false" width="16" class="gridline-toggle" title="Toggle Feature" onclick="loadCollapse(this);">
+									<span class="bi bi-chevron-down"></span>
+								</td>
+								<td class="gridline" colspan="7">
+									<span class="status-dot bgcolor-failed"></span>
+									<a class="gridline-heading" href="#">Login</a>
+								</td>
+								<td class="gridline" align="right"></td>
+							</tr>
+							<tr data-parent="94dbf979-41d6-4234-8642-fd382888bdd1" data-role="scenario" data-tags="Login Failed @TA-1000 @Login @BusinessTests @TA-1001 @Done  Features/Authentication/Login.feature" data-featureid="94dbf979-41d6-4234-8642-fd382888bdd1" data-scenarioid="04bb23f8b9900f55b0c7615863c762d5" onclick="loadScenario(this);">
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td width="16"></td>
+								<td class="gridline" colspan="6">
+									<span class="status-dot bgcolor-failed"></span>
+									<a href="#">Successful User Login with Valid Credentials</a>
+								</td>
+								<td class="gridline" align="right"></td>
+							</tr>
+							<tr data-parent="94dbf979-41d6-4234-8642-fd382888bdd1" data-role="scenario" data-tags="Login Incomplete @TA-1000 @Login @BusinessTests @TA-1002 @Review  Features/Authentication/Login.feature" data-featureid="94dbf979-41d6-4234-8642-fd382888bdd1" data-scenarioid="171dbe8822403e548d9f65c673adcfa4" onclick="loadScenario(this);">
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td width="16"></td>
+								<td class="gridline" colspan="6">
+									<span class="status-dot bgcolor-incomplete"></span>
+									<a href="#">Unsuccessful User Login with Invalid Credentials</a>
+								</td>
+								<td class="gridline" align="right"></td>
+							</tr>
+							<tr data-name="Features\Inquiries" data-role="folder">
+								<td></td>
+								<td></td>
+								<td class="grid-folder" width="16">📂</td>
+								<td class="gridline" colspan="8">
+									<span class="gridline-folder">Inquiries</span>
+								</td>
+								<td class="gridline" align="right"></td>
+							</tr>
+							<tr data-parent="Features\Inquiries" data-name="861e1313-e4be-458e-b3fc-d967f2e90088" data-role="feature" data-featureid="861e1313-e4be-458e-b3fc-d967f2e90088" onclick="loadFeature(this);">
+								<td></td>
+								<td></td>
+								<td></td>
+								<td data-collapse="false" width="16" class="gridline-toggle" title="Toggle Feature" onclick="loadCollapse(this);">
+									<span class="bi bi-chevron-down"></span>
+								</td>
+								<td class="gridline" colspan="7">
+									<span class="status-dot bgcolor-incomplete"></span>
+									<a class="gridline-heading" href="#">Contact Us</a>
+								</td>
+								<td class="gridline" align="right"></td>
+							</tr>
+							<tr data-parent="861e1313-e4be-458e-b3fc-d967f2e90088" data-role="scenario" data-tags="Contact Us Passed @TA-3000 @ContactUs @BusinessTests @TA-3001 @Done  Features/Inquiries/ContactUs.feature" data-featureid="861e1313-e4be-458e-b3fc-d967f2e90088" data-scenarioid="b4285752d8f11e56b894334546b78c7f" onclick="loadScenario(this);">
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td width="16"></td>
+								<td class="gridline" colspan="6">
+									<span class="status-dot bgcolor-passed"></span>
+									<a href="#">Successful Submitting a Contact Us Inquiry</a>
+								</td>
+								<td class="gridline" align="right"></td>
+							</tr>
+							<tr data-parent="861e1313-e4be-458e-b3fc-d967f2e90088" data-role="scenario" data-tags="Contact Us Skipped @TA-3000 @ContactUs @BusinessTests @TA-3002 @Ignore  Features/Inquiries/ContactUs.feature" data-featureid="861e1313-e4be-458e-b3fc-d967f2e90088" data-scenarioid="8618db5660df6959bf91c10e7a54a677" onclick="loadScenario(this);">
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td width="16"></td>
+								<td class="gridline" colspan="6">
+									<span class="status-dot bgcolor-skipped"></span>
+									<a href="#">Unsuccessful Submitting a Contact Us Inquiry</a>
+								</td>
+								<td class="gridline" align="right"></td>
+							</tr>
+							<tr data-parent="861e1313-e4be-458e-b3fc-d967f2e90088" data-role="scenario" data-tags="Contact Us Incomplete @TA-3000 @ContactUs @BusinessTests @TA-3003 @Review  Features/Inquiries/ContactUs.feature" data-featureid="861e1313-e4be-458e-b3fc-d967f2e90088" data-scenarioid="64417f9cf1024556af46f2041fc7334b" onclick="loadScenario(this);">
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td width="16"></td>
+								<td class="gridline" colspan="6">
+									<span class="status-dot bgcolor-incomplete"></span>
+									<a href="#">Successful Resubmitting a Contact Us Inquiry</a>
+								</td>
+								<td class="gridline" align="right"></td>
+							</tr>
+							<tr data-name="Features\Products" data-role="folder">
+								<td></td>
+								<td></td>
+								<td class="grid-folder" width="16">📂</td>
+								<td class="gridline" colspan="8">
+									<span class="gridline-folder">Products</span>
+								</td>
+								<td class="gridline" align="right"></td>
+							</tr>
+							<tr data-name="Features\Products\Notifications" data-role="folder">
+								<td></td>
+								<td></td>
+								<td></td>
+								<td class="grid-folder" width="16">📂</td>
+								<td class="gridline" colspan="7">
+									<span class="gridline-folder">Notifications</span>
+								</td>
+								<td class="gridline" align="right"></td>
+							</tr>
+							<tr data-parent="Features\Products\Notifications" data-name="4d559689-5c3c-45b8-b4a2-d4c8729c9a85" data-role="feature" data-featureid="4d559689-5c3c-45b8-b4a2-d4c8729c9a85" onclick="loadFeature(this);">
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td data-collapse="false" width="16" class="gridline-toggle" title="Toggle Feature" onclick="loadCollapse(this);">
+									<span class="bi bi-chevron-down"></span>
+								</td>
+								<td class="gridline" colspan="6">
+									<span class="status-dot bgcolor-passed"></span>
+									<a class="gridline-heading" href="#">Orders</a>
+								</td>
+								<td class="gridline" align="right"></td>
+							</tr>
+							<tr data-parent="4d559689-5c3c-45b8-b4a2-d4c8729c9a85" data-role="scenario" data-tags="Orders Passed @TA-4000 @Products @BusinessTests @TA-4001 @Review @TR-4001 Features/Products/Notifications/Orders.feature" data-featureid="4d559689-5c3c-45b8-b4a2-d4c8729c9a85" data-scenarioid="d5f0dae43c4f3056b8152ec3a732894b" onclick="loadScenario(this);">
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td width="16"></td>
+								<td class="gridline" colspan="5">
+									<span class="status-dot bgcolor-passed"></span>
+									<a href="#">Ordering Coffee Confirmation Notification</a>
+								</td>
+								<td class="gridline" align="right"></td>
+							</tr>
+							<tr data-parent="4d559689-5c3c-45b8-b4a2-d4c8729c9a85" data-role="scenario" data-tags="Orders Passed @TA-4000 @Products @BusinessTests @TA-4002 @Review  Features/Products/Notifications/Orders.feature" data-featureid="4d559689-5c3c-45b8-b4a2-d4c8729c9a85" data-scenarioid="be9d5b1982b72a50ad362ded598d518f" onclick="loadScenario(this);">
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td width="16"></td>
+								<td class="gridline" colspan="5">
+									<span class="status-dot bgcolor-passed"></span>
+									<a href="#">Ordering Multiple Coffees Confirmation Notification</a>
+								</td>
+								<td class="gridline" align="right"></td>
+							</tr>
+							<tr data-parent="Features" data-name="ef98dc42-ba4c-4d84-987f-ef479c4c2872" data-role="feature" data-featureid="ef98dc42-ba4c-4d84-987f-ef479c4c2872" onclick="loadFeature(this);">
+								<td></td>
+								<td></td>
+								<td data-collapse="false" width="16" class="gridline-toggle" title="Toggle Feature" onclick="loadCollapse(this);">
+									<span class="bi bi-chevron-down"></span>
+								</td>
+								<td class="gridline" colspan="8">
+									<span class="status-dot bgcolor-failed"></span>
+									<a class="gridline-heading" href="#">Registration</a>
+								</td>
+								<td class="gridline" align="right"></td>
+							</tr>
+							<tr data-parent="ef98dc42-ba4c-4d84-987f-ef479c4c2872" data-role="scenario" data-tags="Registration Passed @TA-2000 @Registration @BusinessTests @TA-2001 @InProgress  Features/Registration.feature" data-featureid="ef98dc42-ba4c-4d84-987f-ef479c4c2872" data-scenarioid="1eb4427729b45454b5f84d3ac2d73e73" onclick="loadScenario(this);">
+								<td></td>
+								<td></td>
+								<td></td>
+								<td width="16"></td>
+								<td class="gridline" colspan="7">
+									<span class="status-dot bgcolor-passed"></span>
+									<a href="#">Successful Submitting a Registration Inquiry</a>
+								</td>
+								<td class="gridline" align="right"></td>
+							</tr>
+							<tr data-parent="ef98dc42-ba4c-4d84-987f-ef479c4c2872" data-role="scenario" data-tags="Registration Failed @TA-2000 @Registration @BusinessTests @TA-2002 @InProgress  Features/Registration.feature" data-featureid="ef98dc42-ba4c-4d84-987f-ef479c4c2872" data-scenarioid="62a2bcc4d66ef0518838494fb0c59e43" onclick="loadScenario(this);">
+								<td></td>
+								<td></td>
+								<td></td>
+								<td width="16"></td>
+								<td class="gridline" colspan="7">
+									<span class="status-dot bgcolor-failed"></span>
+									<a href="#">Successful Canceling a Registration Inquiry</a>
+								</td>
+								<td class="gridline" align="right"></td>
+							</tr>
+							<tr data-parent="ef98dc42-ba4c-4d84-987f-ef479c4c2872" data-role="scenario" data-tags="Registration Passed @TA-2000 @Registration @BusinessTests @TA-2003 @InProgress  Features/Registration.feature" data-featureid="ef98dc42-ba4c-4d84-987f-ef479c4c2872" data-scenarioid="5091d0b43e12a8549dc5d3dd0ec45c9b" onclick="loadScenario(this);">
+								<td></td>
+								<td></td>
+								<td></td>
+								<td width="16"></td>
+								<td class="gridline" colspan="7">
+									<span class="status-dot bgcolor-passed"></span>
+									<a href="#">Successful Resubmitting a Registration Inquiry</a>
+								</td>
+								<td class="gridline" align="right"></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+			
+			<!-- Data Features View -->
+			<div class="data-item" id="features-view">
+				<div class="section">
+					<table id="table-grid" class="grid-view">
+						<thead>
+							<tr data-role="header">
+								<th width="20" class="align-center" onclick="sortTableByColumn(0)"></th>
+								<th onclick="sortTableByColumn(1)">Feature<span class="sort-column">⇅</span>
+								</th>
+								<th width="110" onclick="sortTableByColumnByAttibute(2, &quot;data-scenarios&quot;)">Scenarios<span class="sort-column">⇅</span>
+								</th>
+								<th width="120" onclick="sortTableByColumnByAttibute(3, &quot;data-completion&quot;)">Completion<span class="sort-column">⇅</span>
+								</th>
+								<th width="110" onclick="sortTableByColumnByAttibute(4, &quot;data-duration&quot;)">Duration<span class="sort-column">⇅</span>
+								</th>
+								<th width="100" onclick="sortTableByColumn(5)">Status<span class="sort-column">⇅</span>
+								</th>
+							</tr>
+						</thead>
+						<tbody id="table-list">
+							<tr class="gridline" data-role="feature" data-tags="Contact Us @TA-3000 @ContactUs @BusinessTests" data-featureid="861e1313-e4be-458e-b3fc-d967f2e90088" onclick="loadFeature(this);">
+								<td align="center">
+									<span class="status-dot bgcolor-incomplete"></span>
+								</td>
+								<td>
+									<a href="#">Contact Us</a>
+								</td>
+								<td align="center" data-scenarios="0003">3</td>
+								<td align="center" data-completion="0033">33%</td>
+								<td align="center" data-duration="00:18:230">18s 230ms</td>
+								<td>Incomplete</td>
+							</tr>
+							<tr class="gridline" data-role="feature" data-tags="Login @TA-1000 @Login @BusinessTests" data-featureid="94dbf979-41d6-4234-8642-fd382888bdd1" onclick="loadFeature(this);">
+								<td align="center">
+									<span class="status-dot bgcolor-failed"></span>
+								</td>
+								<td>
+									<a href="#">Login</a>
+								</td>
+								<td align="center" data-scenarios="0002">2</td>
+								<td align="center" data-completion="0000">0%</td>
+								<td align="center" data-duration="00:15:270">15s 270ms</td>
+								<td>Failed</td>
+							</tr>
+							<tr class="gridline" data-role="feature" data-tags="Orders @TA-4000 @Products @BusinessTests" data-featureid="4d559689-5c3c-45b8-b4a2-d4c8729c9a85" onclick="loadFeature(this);">
+								<td align="center">
+									<span class="status-dot bgcolor-passed"></span>
+								</td>
+								<td>
+									<a href="#">Orders</a>
+								</td>
+								<td align="center" data-scenarios="0002">2</td>
+								<td align="center" data-completion="0100">100%</td>
+								<td align="center" data-duration="00:14:268">14s 268ms</td>
+								<td>Passed</td>
+							</tr>
+							<tr class="gridline" data-role="feature" data-tags="Registration @TA-2000 @Registration @BusinessTests" data-featureid="ef98dc42-ba4c-4d84-987f-ef479c4c2872" onclick="loadFeature(this);">
+								<td align="center">
+									<span class="status-dot bgcolor-failed"></span>
+								</td>
+								<td>
+									<a href="#">Registration</a>
+								</td>
+								<td align="center" data-scenarios="0003">3</td>
+								<td align="center" data-completion="0067">67%</td>
+								<td align="center" data-duration="00:29:192">29s 192ms</td>
+								<td>Failed</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+			
+			<!-- Data Scenarios View -->
+			<div class="data-item" id="scenarios-view">
+				<div class="section">
+					<table id="table-grid" class="grid-view">
+						<thead>
+							<tr data-role="header">
+								<th width="20" class="align-center" onclick="sortTableByColumn(0)"></th>
+								<th onclick="sortTableByColumn(1)">Scenario<span class="sort-column">⇅</span>
+								</th>
+								<th width="100" onclick="sortTableByColumnByAttibute(2, &quot;data-order&quot;)">Order<span class="sort-column">⇅</span>
+								</th>
+								<th width="110" onclick="sortTableByColumnByAttibute(3, &quot;data-duration&quot;)">Duration<span class="sort-column">⇅</span>
+								</th>
+								<th width="100" onclick="sortTableByColumn(4)">Status<span class="sort-column">⇅</span>
+								</th>
+							</tr>
+						</thead>
+						<tbody id="table-list">
+							<tr class="gridline" data-role="scenario" data-tags="Passed Contact Us @TA-3000 @ContactUs @BusinessTests @TA-3001 @Done" data-featureid="861e1313-e4be-458e-b3fc-d967f2e90088" data-scenarioid="b4285752d8f11e56b894334546b78c7f" onclick="loadScenario(this);">
+								<td align="center">
+									<span class="status-dot bgcolor-passed"></span>
+								</td>
+								<td>
+									<a href="#">Successful Submitting a Contact Us Inquiry</a>
+								</td>
+								<td align="center" data-order="0001">1</td>
+								<td align="center" data-duration="00:09:305">9s 305ms</td>
+								<td>Passed</td>
+							</tr>
+							<tr class="gridline" data-role="scenario" data-tags="Skipped Contact Us @TA-3000 @ContactUs @BusinessTests @TA-3002 @Ignore" data-featureid="861e1313-e4be-458e-b3fc-d967f2e90088" data-scenarioid="8618db5660df6959bf91c10e7a54a677" onclick="loadScenario(this);">
+								<td align="center">
+									<span class="status-dot bgcolor-skipped"></span>
+								</td>
+								<td>
+									<a href="#">Unsuccessful Submitting a Contact Us Inquiry</a>
+								</td>
+								<td align="center" data-order="0002">2</td>
+								<td align="center" data-duration="00:00:000">0s 000ms</td>
+								<td>Skipped</td>
+							</tr>
+							<tr class="gridline" data-role="scenario" data-tags="Incomplete Contact Us @TA-3000 @ContactUs @BusinessTests @TA-3003 @Review" data-featureid="861e1313-e4be-458e-b3fc-d967f2e90088" data-scenarioid="64417f9cf1024556af46f2041fc7334b" onclick="loadScenario(this);">
+								<td align="center">
+									<span class="status-dot bgcolor-incomplete"></span>
+								</td>
+								<td>
+									<a href="#">Successful Resubmitting a Contact Us Inquiry</a>
+								</td>
+								<td align="center" data-order="0003">3</td>
+								<td align="center" data-duration="00:08:924">8s 924ms</td>
+								<td>Incomplete</td>
+							</tr>
+							<tr class="gridline" data-role="scenario" data-tags="Failed Login @TA-1000 @Login @BusinessTests @TA-1001 @Done" data-featureid="94dbf979-41d6-4234-8642-fd382888bdd1" data-scenarioid="04bb23f8b9900f55b0c7615863c762d5" onclick="loadScenario(this);">
+								<td align="center">
+									<span class="status-dot bgcolor-failed"></span>
+								</td>
+								<td>
+									<a href="#">Successful User Login with Valid Credentials</a>
+								</td>
+								<td align="center" data-order="0004">4</td>
+								<td align="center" data-duration="00:06:718">6s 718ms</td>
+								<td>Failed</td>
+							</tr>
+							<tr class="gridline" data-role="scenario" data-tags="Incomplete Login @TA-1000 @Login @BusinessTests @TA-1002 @Review" data-featureid="94dbf979-41d6-4234-8642-fd382888bdd1" data-scenarioid="171dbe8822403e548d9f65c673adcfa4" onclick="loadScenario(this);">
+								<td align="center">
+									<span class="status-dot bgcolor-incomplete"></span>
+								</td>
+								<td>
+									<a href="#">Unsuccessful User Login with Invalid Credentials</a>
+								</td>
+								<td align="center" data-order="0005">5</td>
+								<td align="center" data-duration="00:08:551">8s 551ms</td>
+								<td>Incomplete</td>
+							</tr>
+							<tr class="gridline" data-role="scenario" data-tags="Passed Orders @TA-4000 @Products @BusinessTests @TA-4001 @Review" data-featureid="4d559689-5c3c-45b8-b4a2-d4c8729c9a85" data-scenarioid="d5f0dae43c4f3056b8152ec3a732894b" onclick="loadScenario(this);">
+								<td align="center">
+									<span class="status-dot bgcolor-passed"></span>
+								</td>
+								<td>
+									<a href="#">Ordering Coffee Confirmation Notification</a>
+								</td>
+								<td align="center" data-order="0009">9</td>
+								<td align="center" data-duration="00:09:755">9s 755ms</td>
+								<td>Passed</td>
+							</tr>
+							<tr class="gridline" data-role="scenario" data-tags="Passed Orders @TA-4000 @Products @BusinessTests @TA-4002 @Review" data-featureid="4d559689-5c3c-45b8-b4a2-d4c8729c9a85" data-scenarioid="be9d5b1982b72a50ad362ded598d518f" onclick="loadScenario(this);">
+								<td align="center">
+									<span class="status-dot bgcolor-passed"></span>
+								</td>
+								<td>
+									<a href="#">Ordering Multiple Coffees Confirmation Notification</a>
+								</td>
+								<td align="center" data-order="0010">10</td>
+								<td align="center" data-duration="00:04:512">4s 512ms</td>
+								<td>Passed</td>
+							</tr>
+							<tr class="gridline" data-role="scenario" data-tags="Passed Registration @TA-2000 @Registration @BusinessTests @TA-2001 @InProgress" data-featureid="ef98dc42-ba4c-4d84-987f-ef479c4c2872" data-scenarioid="1eb4427729b45454b5f84d3ac2d73e73" onclick="loadScenario(this);">
+								<td align="center">
+									<span class="status-dot bgcolor-passed"></span>
+								</td>
+								<td>
+									<a href="#">Successful Submitting a Registration Inquiry</a>
+								</td>
+								<td align="center" data-order="0006">6</td>
+								<td align="center" data-duration="00:06:624">6s 624ms</td>
+								<td>Passed</td>
+							</tr>
+							<tr class="gridline" data-role="scenario" data-tags="Failed Registration @TA-2000 @Registration @BusinessTests @TA-2002 @InProgress" data-featureid="ef98dc42-ba4c-4d84-987f-ef479c4c2872" data-scenarioid="62a2bcc4d66ef0518838494fb0c59e43" onclick="loadScenario(this);">
+								<td align="center">
+									<span class="status-dot bgcolor-failed"></span>
+								</td>
+								<td>
+									<a href="#">Successful Canceling a Registration Inquiry</a>
+								</td>
+								<td align="center" data-order="0007">7</td>
+								<td align="center" data-duration="00:12:417">12s 417ms</td>
+								<td>Failed</td>
+							</tr>
+							<tr class="gridline" data-role="scenario" data-tags="Passed Registration @TA-2000 @Registration @BusinessTests @TA-2003 @InProgress" data-featureid="ef98dc42-ba4c-4d84-987f-ef479c4c2872" data-scenarioid="5091d0b43e12a8549dc5d3dd0ec45c9b" onclick="loadScenario(this);">
+								<td align="center">
+									<span class="status-dot bgcolor-passed"></span>
+								</td>
+								<td>
+									<a href="#">Successful Resubmitting a Registration Inquiry</a>
+								</td>
+								<td align="center" data-order="0008">8</td>
+								<td align="center" data-duration="00:10:150">10s 150ms</td>
+								<td>Passed</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+			
+			<!-- Data Steps View -->
+			<div class="data-item" id="steps-view">
+				<div class="section">
+					<table id="table-grid" class="grid-view">
+						<thead>
+							<tr data-role="header">
+								<th width="20" class="align-center" onclick="sortTableByColumn(0)"></th>
+								<th onclick="sortTableByColumn(1)">Step<span class="sort-column">⇅</span>
+								</th>
+								<th width="100" onclick="sortTableByColumnByAttibute(2, &quot;data-count&quot;)">Usage<span class="sort-column">⇅</span>
+								</th>
+								<th width="100" onclick="sortTableByColumn(3)">Status<span class="sort-column">⇅</span>
+								</th>
+							</tr>
+						</thead>
+						<tbody id="table-list">
+							<tr class="gridline" data-role="step" data-tags="Failed Login @TA-1000 @Login @BusinessTests @TA-1001 @Done" data-featureid="94dbf979-41d6-4234-8642-fd382888bdd1" data-scenarioid="04bb23f8b9900f55b0c7615863c762d5" onclick="loadScenario(this);">
+								<td align="center">
+									<span class="status-dot bgcolor-failed"></span>
+								</td>
+								<td>
+									<a href="#">Then I should be redirected to the Home page</a>
+								</td>
+								<td align="center" data-count="0001">1</td>
+								<td>Failed</td>
+							</tr>
+							<tr class="gridline" data-role="step" data-tags="Failed Registration @TA-2000 @Registration @BusinessTests @TA-2002 @InProgress" data-featureid="ef98dc42-ba4c-4d84-987f-ef479c4c2872" data-scenarioid="62a2bcc4d66ef0518838494fb0c59e43" onclick="loadScenario(this);">
+								<td align="center">
+									<span class="status-dot bgcolor-failed"></span>
+								</td>
+								<td>
+									<a href="#">When I complete and cancel the Registration formular</a>
+								</td>
+								<td align="center" data-count="0001">1</td>
+								<td>Failed</td>
+							</tr>
+							<tr class="gridline" data-role="step" data-tags="Incomplete Contact Us @TA-3000 @ContactUs @BusinessTests @TA-3003 @Review" data-featureid="861e1313-e4be-458e-b3fc-d967f2e90088" data-scenarioid="64417f9cf1024556af46f2041fc7334b" onclick="loadScenario(this);">
+								<td align="center">
+									<span class="status-dot bgcolor-incomplete"></span>
+								</td>
+								<td>
+									<a href="#">And I resubmit the Contact Us formular</a>
+								</td>
+								<td align="center" data-count="0001">1</td>
+								<td>Incomplete</td>
+							</tr>
+							<tr class="gridline" data-role="step" data-tags="Incomplete Login @TA-1000 @Login @BusinessTests @TA-1002 @Review" data-featureid="94dbf979-41d6-4234-8642-fd382888bdd1" data-scenarioid="171dbe8822403e548d9f65c673adcfa4" onclick="loadScenario(this);">
+								<td align="center">
+									<span class="status-dot bgcolor-incomplete"></span>
+								</td>
+								<td>
+									<a href="#">Then I should have an error message on the Login page</a>
+								</td>
+								<td align="center" data-count="0001">1</td>
+								<td>Incomplete</td>
+							</tr>
+							<tr class="gridline" data-role="step" data-tags="Skipped Contact Us @TA-3000 @ContactUs @BusinessTests @TA-3002 @Ignore" data-featureid="861e1313-e4be-458e-b3fc-d967f2e90088" data-scenarioid="8618db5660df6959bf91c10e7a54a677" onclick="loadScenario(this);">
+								<td align="center">
+									<span class="status-dot bgcolor-skipped"></span>
+								</td>
+								<td>
+									<a href="#">Given I have logged in with valid user credentials</a>
+								</td>
+								<td align="center" data-count="0007">7</td>
+								<td>Skipped</td>
+							</tr>
+							<tr class="gridline" data-role="step" data-tags="Skipped Contact Us @TA-3000 @ContactUs @BusinessTests @TA-3002 @Ignore" data-featureid="861e1313-e4be-458e-b3fc-d967f2e90088" data-scenarioid="8618db5660df6959bf91c10e7a54a677" onclick="loadScenario(this);">
+								<td align="center">
+									<span class="status-dot bgcolor-skipped"></span>
+								</td>
+								<td>
+									<a href="#">When I complete and submit the Contact Us formular</a>
+								</td>
+								<td align="center" data-count="0003">3</td>
+								<td>Skipped</td>
+							</tr>
+							<tr class="gridline" data-role="step" data-tags="Skipped Contact Us @TA-3000 @ContactUs @BusinessTests @TA-3002 @Ignore" data-featureid="861e1313-e4be-458e-b3fc-d967f2e90088" data-scenarioid="8618db5660df6959bf91c10e7a54a677" onclick="loadScenario(this);">
+								<td align="center">
+									<span class="status-dot bgcolor-skipped"></span>
+								</td>
+								<td>
+									<a href="#">Then I should receive an inquiry confirmation message</a>
+								</td>
+								<td align="center" data-count="0003">3</td>
+								<td>Skipped</td>
+							</tr>
+							<tr class="gridline" data-role="step" data-tags="Skipped Registration @TA-2000 @Registration @BusinessTests @TA-2002 @InProgress" data-featureid="ef98dc42-ba4c-4d84-987f-ef479c4c2872" data-scenarioid="62a2bcc4d66ef0518838494fb0c59e43" onclick="loadScenario(this);">
+								<td align="center">
+									<span class="status-dot bgcolor-skipped"></span>
+								</td>
+								<td>
+									<a href="#">Then I should be redirected to the Login page</a>
+								</td>
+								<td align="center" data-count="0003">3</td>
+								<td>Skipped</td>
+							</tr>
+							<tr class="gridline" data-role="step" data-tags="Passed Login @TA-1000 @Login @BusinessTests @TA-1002 @Review" data-featureid="94dbf979-41d6-4234-8642-fd382888bdd1" data-scenarioid="171dbe8822403e548d9f65c673adcfa4" onclick="loadScenario(this);">
+								<td align="center">
+									<span class="status-dot bgcolor-passed"></span>
+								</td>
+								<td>
+									<a href="#">Given I have logged in with invalid user credentials</a>
+								</td>
+								<td align="center" data-count="0001">1</td>
+								<td>Passed</td>
+							</tr>
+							<tr class="gridline" data-role="step" data-tags="Passed Orders @TA-4000 @Products @BusinessTests @TA-4001 @Review" data-featureid="4d559689-5c3c-45b8-b4a2-d4c8729c9a85" data-scenarioid="d5f0dae43c4f3056b8152ec3a732894b" onclick="loadScenario(this);">
+								<td align="center">
+									<span class="status-dot bgcolor-passed"></span>
+								</td>
+								<td>
+									<a href="#">When I add &lt;Brand&gt; coffee to the shopping cart</a>
+								</td>
+								<td align="center" data-count="0002">2</td>
+								<td>Passed</td>
+							</tr>
+							<tr class="gridline" data-role="step" data-tags="Passed Orders @TA-4000 @Products @BusinessTests @TA-4001 @Review" data-featureid="4d559689-5c3c-45b8-b4a2-d4c8729c9a85" data-scenarioid="d5f0dae43c4f3056b8152ec3a732894b" onclick="loadScenario(this);">
+								<td align="center">
+									<span class="status-dot bgcolor-passed"></span>
+								</td>
+								<td>
+									<a href="#">Then I should have &lt;Price&gt; in the confirmation notification message</a>
+								</td>
+								<td align="center" data-count="0002">2</td>
+								<td>Passed</td>
+							</tr>
+							<tr class="gridline" data-role="step" data-tags="Passed Orders @TA-4000 @Products @BusinessTests @TA-4002 @Review" data-featureid="4d559689-5c3c-45b8-b4a2-d4c8729c9a85" data-scenarioid="be9d5b1982b72a50ad362ded598d518f" onclick="loadScenario(this);">
+								<td align="center">
+									<span class="status-dot bgcolor-passed"></span>
+								</td>
+								<td>
+									<a href="#">When I add multiple pieces of coffees to the shopping cart</a>
+								</td>
+								<td align="center" data-count="0001">1</td>
+								<td>Passed</td>
+							</tr>
+							<tr class="gridline" data-role="step" data-tags="Passed Orders @TA-4000 @Products @BusinessTests @TA-4002 @Review" data-featureid="4d559689-5c3c-45b8-b4a2-d4c8729c9a85" data-scenarioid="be9d5b1982b72a50ad362ded598d518f" onclick="loadScenario(this);">
+								<td align="center">
+									<span class="status-dot bgcolor-passed"></span>
+								</td>
+								<td>
+									<a href="#">Then I should have a confirmation notification message</a>
+								</td>
+								<td align="center" data-count="0001">1</td>
+								<td>Passed</td>
+							</tr>
+							<tr class="gridline" data-role="step" data-tags="Passed Registration @TA-2000 @Registration @BusinessTests @TA-2001 @InProgress" data-featureid="ef98dc42-ba4c-4d84-987f-ef479c4c2872" data-scenarioid="1eb4427729b45454b5f84d3ac2d73e73" onclick="loadScenario(this);">
+								<td align="center">
+									<span class="status-dot bgcolor-passed"></span>
+								</td>
+								<td>
+									<a href="#">When I complete and submit the Registration formular</a>
+								</td>
+								<td align="center" data-count="0002">2</td>
+								<td>Passed</td>
+							</tr>
+							<tr class="gridline" data-role="step" data-tags="Passed Registration @TA-2000 @Registration @BusinessTests @TA-2003 @InProgress" data-featureid="ef98dc42-ba4c-4d84-987f-ef479c4c2872" data-scenarioid="5091d0b43e12a8549dc5d3dd0ec45c9b" onclick="loadScenario(this);">
+								<td align="center">
+									<span class="status-dot bgcolor-passed"></span>
+								</td>
+								<td>
+									<a href="#">And I complete and submit the Registration formular</a>
+								</td>
+								<td align="center" data-count="0001">1</td>
+								<td>Passed</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+			
+			<!-- Data Feature -->
+			<div class="data-item" id="861e1313-e4be-458e-b3fc-d967f2e90088">
+				
+				<!-- Feature Section -->
+				<div class="section">
+					
+					<!-- Data Feature Tags -->
+					<div>
+						<span class="feature-tags">@TA-3000 @ContactUs @BusinessTests</span>
+					</div>
+					
+					<!-- Data Feature Name -->
+					<div>
+						<span class="status-dot bgcolor-incomplete"></span>
+						<span class="feature-keyword">Feature:
+						</span>
+						<span class="feature-name">Contact Us</span>
+					</div>
+					
+					<!-- Data Feature Description -->
+					<div>
+						<ul class="feature-description">
+							<li>As a User</li>
+							<li>I want to send to a Contact Us inquiry</li>
+							<li>So that I can recieve detailed product information</li>
+						</ul>
+					</div>
+					<hr>
+					
+					<!-- Data Feature Background -->
+					<div>
+						<span class="background-keyword">Background:</span>
+						
+						<!-- Data Background Steps -->
+						<div>
+							<ul class="scenario-steps">
+								<li>
+									<span class="color-skipped"></span>
+									<span class="step-keyword">Given</span>
+									<span class="step-name">I have logged in with valid user credentials</span>
+								</li>
+							</ul>
+						</div>
+					</div>
+					<hr>
+				</div>
+			</div>
+			
+			<!-- Data Feature -->
+			<div class="data-item" id="94dbf979-41d6-4234-8642-fd382888bdd1">
+				
+				<!-- Feature Section -->
+				<div class="section">
+					
+					<!-- Data Feature Tags -->
+					<div>
+						<span class="feature-tags">@TA-1000 @Login @BusinessTests</span>
+					</div>
+					
+					<!-- Data Feature Name -->
+					<div>
+						<span class="status-dot bgcolor-failed"></span>
+						<span class="feature-keyword">Feature:
+						</span>
+						<span class="feature-name">Login</span>
+					</div>
+					
+					<!-- Data Feature Description -->
+					<div>
+						<ul class="feature-description">
+							<li>As a User</li>
+							<li>I want to login to the web application</li>
+							<li>So that I can administrate my product orders</li>
+						</ul>
+					</div>
+					<hr>
+				</div>
+			</div>
+			
+			<!-- Data Feature -->
+			<div class="data-item" id="4d559689-5c3c-45b8-b4a2-d4c8729c9a85">
+				
+				<!-- Feature Section -->
+				<div class="section">
+					
+					<!-- Data Feature Tags -->
+					<div>
+						<span class="feature-tags">@TA-4000 @Products @BusinessTests</span>
+					</div>
+					
+					<!-- Data Feature Name -->
+					<div>
+						<span class="status-dot bgcolor-passed"></span>
+						<span class="feature-keyword">Feature:
+						</span>
+						<span class="feature-name">Orders</span>
+					</div>
+					
+					<!-- Data Feature Description -->
+					<div>
+						<ul class="feature-description">
+							<li>As a User</li>
+							<li>I want to order products from the web application</li>
+							<li>So that I can enjoy my favorite coffee</li>
+						</ul>
+					</div>
+					<hr>
+				</div>
+			</div>
+			
+			<!-- Data Feature -->
+			<div class="data-item" id="ef98dc42-ba4c-4d84-987f-ef479c4c2872">
+				
+				<!-- Feature Section -->
+				<div class="section">
+					
+					<!-- Data Feature Tags -->
+					<div>
+						<span class="feature-tags">@TA-2000 @Registration @BusinessTests</span>
+					</div>
+					
+					<!-- Data Feature Name -->
+					<div>
+						<span class="status-dot bgcolor-failed"></span>
+						<span class="feature-keyword">Feature:
+						</span>
+						<span class="feature-name">Registration</span>
+					</div>
+					
+					<!-- Data Feature Description -->
+					<div>
+						<ul class="feature-description">
+							<li>As a User</li>
+							<li>I want to send to a Registration inquiry</li>
+							<li>So that I can order my favorite coffee</li>
+						</ul>
+					</div>
+					<hr>
+				</div>
+			</div>
+			
+			<!-- Data Scenario -->
+			<div class="data-item" id="b4285752d8f11e56b894334546b78c7f">
+				
+				<!-- Scenario Section -->
+				<div class="section" style="width: fit-content; max-width: 98%">
+					
+					<!-- Data Scenario Tags -->
+					<div>
+						<span class="scenario-tags">@TA-3001 @Done</span>
+					</div>
+					
+					<!-- Data Scenario Name -->
+					<div>
+						<span class="status-dot bgcolor-passed"></span>
+						<span class="scenario-keyword">Scenario:
+						</span>
+						<span class="scenario-name">Successful Submitting a Contact Us Inquiry</span>
+						<span class="scenario-duration">9s 305ms</span>
+						<a href="#" class="scenario-attachments" title="Toggle Attachments" onclick="toggleAttachments(this)">☰</a>
+					</div>
+					
+					<!-- Data Scenario Steps -->
+					<div>
+						<ul class="scenario-steps">
+							<li>
+								<span class="step-marker color-passed">✓</span>
+								<span class="step-keyword">Given</span>
+								<span class="step-name">I have logged in with valid user credentials</span>
+							</li>
+							<li>
+								<span class="step-marker color-passed">✓</span>
+								<span class="step-keyword">When</span>
+								<span class="step-name">I complete and submit the Contact Us formular</span>
+							</li>
+							<li>
+								<span class="step-marker color-passed">✓</span>
+								<span class="step-keyword">Then</span>
+								<span class="step-name">I should receive an inquiry confirmation message</span>
+							</li>
+						</ul>
+					</div>
+					
+					<!-- Data Scenario Attachments -->
+					<div class="attachments" style="display: none;">
+						<span class="attachments-keyword">Attachments:</span>
+						<ul class="attachments-files">
+							<li>
+								<a target="_blank" href="TestResults/SuccessfulSubmittingAContactUsInquiry/SuccessfulSubmittingAContactUsInquiry.txt">SuccessfulSubmittingAContactUsInquiry.txt</a>
+							</li>
+							<li>
+								<a target="_blank" href="TestResults/SuccessfulSubmittingAContactUsInquiry/SuccessfulSubmittingAContactUsInquiry.png">SuccessfulSubmittingAContactUsInquiry.png</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<hr>
+			</div>
+			
+			<!-- Data Scenario -->
+			<div class="data-item" id="8618db5660df6959bf91c10e7a54a677">
+				
+				<!-- Scenario Section -->
+				<div class="section" style="width: fit-content; max-width: 98%">
+					
+					<!-- Data Scenario Tags -->
+					<div>
+						<span class="scenario-tags">@TA-3002 @Ignore</span>
+					</div>
+					
+					<!-- Data Scenario Name -->
+					<div>
+						<span class="status-dot bgcolor-skipped"></span>
+						<span class="scenario-keyword">Scenario:
+						</span>
+						<span class="scenario-name">Unsuccessful Submitting a Contact Us Inquiry</span>
+						<span class="scenario-duration">0s 000ms</span>
+					</div>
+					
+					<!-- Data Scenario Steps -->
+					<div>
+						<ul class="scenario-steps">
+							<li>
+								<span class="step-marker color-skipped">✗</span>
+								<span class="step-keyword">Given</span>
+								<span class="step-name">I have logged in with valid user credentials</span>
+							</li>
+							<li>
+								<span class="step-marker color-skipped">✗</span>
+								<span class="step-keyword">When</span>
+								<span class="step-name">I complete and submit the Contact Us formular</span>
+							</li>
+							<li>
+								<span class="step-marker color-skipped">✗</span>
+								<span class="step-keyword">Then</span>
+								<span class="step-name">I should receive an inquiry confirmation message</span>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<hr>
+			</div>
+			
+			<!-- Data Scenario -->
+			<div class="data-item" id="64417f9cf1024556af46f2041fc7334b">
+				
+				<!-- Scenario Section -->
+				<div class="section" style="width: fit-content; max-width: 98%">
+					
+					<!-- Data Scenario Tags -->
+					<div>
+						<span class="scenario-tags">@TA-3003 @Review</span>
+					</div>
+					
+					<!-- Data Scenario Name -->
+					<div>
+						<span class="status-dot bgcolor-incomplete"></span>
+						<span class="scenario-keyword">Scenario:
+						</span>
+						<span class="scenario-name">Successful Resubmitting a Contact Us Inquiry</span>
+						<span class="scenario-duration">8s 924ms</span>
+						<a href="#" class="scenario-attachments" title="Toggle Attachments" onclick="toggleAttachments(this)">☰</a>
+					</div>
+					
+					<!-- Data Scenario Steps -->
+					<div>
+						<ul class="scenario-steps">
+							<li>
+								<span class="step-marker color-passed">✓</span>
+								<span class="step-keyword">Given</span>
+								<span class="step-name">I have logged in with valid user credentials</span>
+							</li>
+							<li>
+								<span class="step-marker color-passed">✓</span>
+								<span class="step-keyword">When</span>
+								<span class="step-name">I complete and submit the Contact Us formular</span>
+							</li>
+							<li>
+								<span class="step-marker color-incomplete">✗</span>
+								<span class="step-keyword">And</span>
+								<span class="step-name">I resubmit the Contact Us formular</span>
+							</li>
+							
+							<!-- Data Step Message -->
+							<li>
+								<div class="message-box">
+									<div class="message-incomplete">
+										<b>Warning</b>
+										<br>
+										Undefined Step Definition...<br>
+									</div>
+								</div>
+							</li>
+							<li>
+								<span class="step-marker color-skipped">✗</span>
+								<span class="step-keyword">Then</span>
+								<span class="step-name">I should receive an inquiry confirmation message</span>
+							</li>
+						</ul>
+					</div>
+					
+					<!-- Data Scenario Attachments -->
+					<div class="attachments" style="display: none;">
+						<span class="attachments-keyword">Attachments:</span>
+						<ul class="attachments-files">
+							<li>
+								<a target="_blank" href="TestResults/SuccessfulResubmittingAContactUsInquiry/SuccessfulResubmittingAContactUsInquiry.txt">SuccessfulResubmittingAContactUsInquiry.txt</a>
+							</li>
+							<li>
+								<a target="_blank" href="TestResults/SuccessfulResubmittingAContactUsInquiry/SuccessfulResubmittingAContactUsInquiry.png">SuccessfulResubmittingAContactUsInquiry.png</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<hr>
+			</div>
+			
+			<!-- Data Scenario -->
+			<div class="data-item" id="04bb23f8b9900f55b0c7615863c762d5">
+				
+				<!-- Scenario Section -->
+				<div class="section" style="width: fit-content; max-width: 98%">
+					
+					<!-- Data Scenario Tags -->
+					<div>
+						<span class="scenario-tags">@TA-1001 @Done</span>
+					</div>
+					
+					<!-- Data Scenario Name -->
+					<div>
+						<span class="status-dot bgcolor-failed"></span>
+						<span class="scenario-keyword">Scenario:
+						</span>
+						<span class="scenario-name">Successful User Login with Valid Credentials</span>
+						<span class="scenario-duration">6s 718ms</span>
+						<a href="#" class="scenario-stacktraces bi bi-code-slash" title="Toggle Stacktrace" onclick="toggleStacktraces(this)"></a>
+						<a href="#" class="scenario-attachments" title="Toggle Attachments" onclick="toggleAttachments(this)">☰</a>
+					</div>
+					
+					<!-- Data Scenario Steps -->
+					<div>
+						<ul class="scenario-steps">
+							<li>
+								<span class="step-marker color-passed">✓</span>
+								<span class="step-keyword">Given</span>
+								<span class="step-name">I have logged in with valid user credentials</span>
+							</li>
+							<li>
+								<span class="step-marker color-failed">✗</span>
+								<span class="step-keyword">Then</span>
+								<span class="step-name">I should be redirected to the Home page</span>
+							</li>
+							
+							<!-- Data Step Message -->
+							<li>
+								<div class="message-box">
+									<div class="message-failed">
+										<b>ApplicationException</b>
+										<br>
+										Validate the HomePage title property...<br>Expected to be equal [XHome] but was [Home] - FAILED<br>
+									</div>
+								</div>
+							</li>
+							
+							<!-- Data Step Message -->
+							<li class="stacktraces" style="display : none;">
+								<div class="message-box">
+									<div class="message-failed">
+										<b>Stacktrace</b>
+										<br>
+										<div class="message-stacktrace">
+											at Expressium.Coffeeshop.Web.API.Tests.Asserts.EqualTo(Object actual, Object expected, String message) in C:\Company\Source\Expressium.LivingDoc\Expressium.Coffeeshop.Web.API.Tests\Asserts.cs:line 27
+											<br>
+											at Expressium.Coffeeshop.Web.API.Tests.Steps.LoginSteps.ThenIShouldBeRedirectedToTheHomePage() in C:\Company\Source\Expressium.LivingDoc\Expressium.Coffeeshop.Web.API.Tests\Steps\LoginSteps.cs:line 29
+											<br>
+											at InvokeStub_Action`1.Invoke(Object, Span`1)
+											<br>
+											at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+											<br>--- End of stack trace from previous location ---
+											<br>
+											at Reqnroll.Bindings.BindingInvoker.InvokeBindingAsync(IBinding binding, IContextManager contextManager, Object[] arguments, ITestTracer testTracer, DurationHolder durationHolder)
+											<br>
+											at Reqnroll.Infrastructure.TestExecutionEngine.ExecuteStepMatchAsync(BindingMatch match, Object[] arguments, DurationHolder durationHolder)
+											<br>
+											at Reqnroll.Infrastructure.TestExecutionEngine.ExecuteStepMatchAsync(BindingMatch match, Object[] arguments, DurationHolder durationHolder)
+											<br>
+											at Reqnroll.Infrastructure.TestExecutionEngine.&lt;&gt;c__DisplayClass56_0.&lt;<executestepasync>b__7&gt;d.MoveNext()
+												<br>--- End of stack trace from previous location ---
+												<br>
+												at Reqnroll.Infrastructure.TestExecutionEngine.&lt;&gt;c__DisplayClass56_0.&lt;<executestepasync>g__HandleStepExecutionExceptions|0&gt;d.MoveNext()<br>
+												</executestepasync>
+											</executestepasync>
+										</div>
+									</div>
+								</div>
+							</li>
+						</ul>
+					</div>
+					
+					<!-- Data Scenario Attachments -->
+					<div class="attachments" style="display: none;">
+						<span class="attachments-keyword">Attachments:</span>
+						<ul class="attachments-files">
+							<li>
+								<a target="_blank" href="TestResults/SuccessfulUserLoginWithValidCredentials/SuccessfulUserLoginWithValidCredentials.txt">SuccessfulUserLoginWithValidCredentials.txt</a>
+							</li>
+							<li>
+								<a target="_blank" href="TestResults/SuccessfulUserLoginWithValidCredentials/SuccessfulUserLoginWithValidCredentials.png">SuccessfulUserLoginWithValidCredentials.png</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<hr>
+			</div>
+			
+			<!-- Data Scenario -->
+			<div class="data-item" id="171dbe8822403e548d9f65c673adcfa4">
+				
+				<!-- Scenario Section -->
+				<div class="section" style="width: fit-content; max-width: 98%">
+					
+					<!-- Data Scenario Tags -->
+					<div>
+						<span class="scenario-tags">@TA-1002 @Review</span>
+					</div>
+					
+					<!-- Data Scenario Name -->
+					<div>
+						<span class="status-dot bgcolor-incomplete"></span>
+						<span class="scenario-keyword">Scenario:
+						</span>
+						<span class="scenario-name">Unsuccessful User Login with Invalid Credentials</span>
+						<span class="scenario-duration">8s 551ms</span>
+						<a href="#" class="scenario-attachments" title="Toggle Attachments" onclick="toggleAttachments(this)">☰</a>
+					</div>
+					
+					<!-- Data Scenario Steps -->
+					<div>
+						<ul class="scenario-steps">
+							<li>
+								<span class="step-marker color-passed">✓</span>
+								<span class="step-keyword">Given</span>
+								<span class="step-name">I have logged in with invalid user credentials</span>
+							</li>
+							<li>
+								<span class="step-marker color-incomplete">✗</span>
+								<span class="step-keyword">Then</span>
+								<span class="step-name">I should have an error message on the Login page</span>
+							</li>
+							
+							<!-- Data Step Message -->
+							<li>
+								<div class="message-box">
+									<div class="message-incomplete">
+										<b>Warning</b>
+										<br>
+										Pending Step Definition...<br>
+									</div>
+								</div>
+							</li>
+						</ul>
+					</div>
+					
+					<!-- Data Scenario Attachments -->
+					<div class="attachments" style="display: none;">
+						<span class="attachments-keyword">Attachments:</span>
+						<ul class="attachments-files">
+							<li>
+								<a target="_blank" href="TestResults/UnsuccessfulUserLoginWithInvalidCredentials/UnsuccessfulUserLoginWithInvalidCredentials.txt">UnsuccessfulUserLoginWithInvalidCredentials.txt</a>
+							</li>
+							<li>
+								<a target="_blank" href="TestResults/UnsuccessfulUserLoginWithInvalidCredentials/UnsuccessfulUserLoginWithInvalidCredentials.png">UnsuccessfulUserLoginWithInvalidCredentials.png</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<hr>
+			</div>
+			
+			<!-- Data Scenario -->
+			<div class="data-item" id="d5f0dae43c4f3056b8152ec3a732894b">
+				
+				<!-- Scenario Rule Section -->
+				<div class="section">
+					
+					<!-- Data Rule Tags -->
+					<div>
+						<span class="rule-tags">@TR-4001</span>
+					</div>
+					
+					<!-- Data Rule Name -->
+					<div>
+						<span class="rule-keyword">Rule:
+						</span>
+						<span class="rule-name">Ordering Confirmation Notification</span>
+					</div>
+					<hr>
+				</div>
+				
+				<!-- Scenario Section -->
+				<div class="section" style="width: fit-content; max-width: 98%">
+					
+					<!-- Data Scenario Tags -->
+					<div>
+						<span class="scenario-tags">@TA-4001 @Review</span>
+					</div>
+					
+					<!-- Data Scenario Name -->
+					<div>
+						<span class="status-dot bgcolor-passed"></span>
+						<span class="scenario-keyword">Scenario:
+						</span>
+						<span class="scenario-name">Ordering Coffee Confirmation Notification</span>
+						<span class="circle-number">1</span>
+						<span class="scenario-duration">5s 100ms</span>
+						<a href="#" class="scenario-attachments" title="Toggle Attachments" onclick="toggleAttachments(this)">☰</a>
+					</div>
+					
+					<!-- Data Scenario Steps -->
+					<div>
+						<ul class="scenario-steps">
+							<li>
+								<span class="step-marker color-passed">✓</span>
+								<span class="step-keyword">Given</span>
+								<span class="step-name">I have logged in with valid user credentials</span>
+							</li>
+							<li>
+								<span class="step-marker color-passed">✓</span>
+								<span class="step-keyword">When</span>
+								<span class="step-name">I add &lt;Brand&gt; coffee to the shopping cart</span>
+							</li>
+							<li>
+								<span class="step-marker color-passed">✓</span>
+								<span class="step-keyword">Then</span>
+								<span class="step-name">I should have &lt;Price&gt; in the confirmation notification message</span>
+							</li>
+						</ul>
+					</div>
+					
+					<!-- Data Scenario Examples -->
+					<div>
+						<span class="examples-keyword">Examples:
+						</span>
+						<div class="examples-datatable">
+							<table class="scenario-datatable">
+								<tbody>
+									<tr>
+										<td>|</td>
+										<td>Brand</td>
+										<td>|</td>
+										<td>Price</td>
+										<td>|</td>
+									</tr>
+									<tr>
+										<td>|</td>
+										<td>Santa Rita Cerrado Mineiro</td>
+										<td>|</td>
+										<td>$99</td>
+										<td>|</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+					
+					<!-- Data Scenario Attachments -->
+					<div class="attachments" style="display: none;">
+						<span class="attachments-keyword">Attachments:</span>
+						<ul class="attachments-files">
+							<li>
+								<a target="_blank" href="TestResults/OrderingCoffeeConfirmationNotificationSantaRitaCerradoMineiro $99/OrderingCoffeeConfirmationNotificationSantaRitaCerradoMineiro $99.txt">OrderingCoffeeConfirmationNotificationSantaRitaCerradoMineiro $99.txt</a>
+							</li>
+							<li>
+								<a target="_blank" href="TestResults/OrderingCoffeeConfirmationNotificationSantaRitaCerradoMineiro $99/OrderingCoffeeConfirmationNotificationSantaRitaCerradoMineiro $99.png">OrderingCoffeeConfirmationNotificationSantaRitaCerradoMineiro $99.png</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<hr>
+				
+				<!-- Scenario Section -->
+				<div class="section" style="width: fit-content; max-width: 98%">
+					
+					<!-- Data Scenario Tags -->
+					<div>
+						<span class="scenario-tags">@TA-4001 @Review</span>
+					</div>
+					
+					<!-- Data Scenario Name -->
+					<div>
+						<span class="status-dot bgcolor-passed"></span>
+						<span class="scenario-keyword">Scenario:
+						</span>
+						<span class="scenario-name">Ordering Coffee Confirmation Notification</span>
+						<span class="circle-number">2</span>
+						<span class="scenario-duration">4s 655ms</span>
+						<a href="#" class="scenario-attachments" title="Toggle Attachments" onclick="toggleAttachments(this)">☰</a>
+					</div>
+					
+					<!-- Data Scenario Steps -->
+					<div>
+						<ul class="scenario-steps">
+							<li>
+								<span class="step-marker color-passed">✓</span>
+								<span class="step-keyword">Given</span>
+								<span class="step-name">I have logged in with valid user credentials</span>
+							</li>
+							<li>
+								<span class="step-marker color-passed">✓</span>
+								<span class="step-keyword">When</span>
+								<span class="step-name">I add &lt;Brand&gt; coffee to the shopping cart</span>
+							</li>
+							<li>
+								<span class="step-marker color-passed">✓</span>
+								<span class="step-keyword">Then</span>
+								<span class="step-name">I should have &lt;Price&gt; in the confirmation notification message</span>
+							</li>
+						</ul>
+					</div>
+					
+					<!-- Data Scenario Examples -->
+					<div>
+						<span class="examples-keyword">Examples:
+						</span>
+						<div class="examples-datatable">
+							<table class="scenario-datatable">
+								<tbody>
+									<tr>
+										<td>|</td>
+										<td>Brand</td>
+										<td>|</td>
+										<td>Price</td>
+										<td>|</td>
+									</tr>
+									<tr>
+										<td>|</td>
+										<td>La Soledad Antioquia</td>
+										<td>|</td>
+										<td>$77</td>
+										<td>|</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+					
+					<!-- Data Scenario Attachments -->
+					<div class="attachments" style="display: none;">
+						<span class="attachments-keyword">Attachments:</span>
+						<ul class="attachments-files">
+							<li>
+								<a target="_blank" href="TestResults/OrderingCoffeeConfirmationNotificationLaSoledadAntioquia $77/OrderingCoffeeConfirmationNotificationLaSoledadAntioquia $77.txt">OrderingCoffeeConfirmationNotificationLaSoledadAntioquia $77.txt</a>
+							</li>
+							<li>
+								<a target="_blank" href="TestResults/OrderingCoffeeConfirmationNotificationLaSoledadAntioquia $77/OrderingCoffeeConfirmationNotificationLaSoledadAntioquia $77.png">OrderingCoffeeConfirmationNotificationLaSoledadAntioquia $77.png</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<hr>
+			</div>
+			
+			<!-- Data Scenario -->
+			<div class="data-item" id="be9d5b1982b72a50ad362ded598d518f">
+				
+				<!-- Scenario Rule Section -->
+				<div class="section">
+					
+					<!-- Data Rule Tags -->
+					<div>
+						<span class="rule-tags"></span>
+					</div>
+					
+					<!-- Data Rule Name -->
+					<div>
+						<span class="rule-keyword">Rule:
+						</span>
+						<span class="rule-name">Ordering Multiple Products</span>
+					</div>
+					<hr>
+				</div>
+				
+				<!-- Scenario Section -->
+				<div class="section" style="width: fit-content; max-width: 98%">
+					
+					<!-- Data Scenario Tags -->
+					<div>
+						<span class="scenario-tags">@TA-4002 @Review</span>
+					</div>
+					
+					<!-- Data Scenario Name -->
+					<div>
+						<span class="status-dot bgcolor-passed"></span>
+						<span class="scenario-keyword">Scenario:
+						</span>
+						<span class="scenario-name">Ordering Multiple Coffees Confirmation Notification</span>
+						<span class="scenario-duration">4s 512ms</span>
+						<a href="#" class="scenario-attachments" title="Toggle Attachments" onclick="toggleAttachments(this)">☰</a>
+					</div>
+					
+					<!-- Data Scenario Steps -->
+					<div>
+						<ul class="scenario-steps">
+							<li>
+								<span class="step-marker color-passed">✓</span>
+								<span class="step-keyword">Given</span>
+								<span class="step-name">I have logged in with valid user credentials</span>
+							</li>
+							<li>
+								<span class="step-marker color-passed">✓</span>
+								<span class="step-keyword">When</span>
+								<span class="step-name">I add multiple pieces of coffees to the shopping cart</span>
+								
+								<!-- Scenario Steps Data Table Section -->
+								<div class="steps-datatable">
+									<table class="scenario-datatable">
+										<tbody>
+											<tr>
+												<td>|</td>
+												<td>Brand</td>
+												<td>|</td>
+												<td>Pieces</td>
+												<td>|</td>
+											</tr>
+											<tr>
+												<td>|</td>
+												<td>La Ceiba Huehuetenango</td>
+												<td>|</td>
+												<td>2</td>
+												<td>|</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</li>
+							<li>
+								<span class="step-marker color-passed">✓</span>
+								<span class="step-keyword">Then</span>
+								<span class="step-name">I should have a confirmation notification message</span>
+							</li>
+						</ul>
+					</div>
+					
+					<!-- Data Scenario Attachments -->
+					<div class="attachments" style="display: none;">
+						<span class="attachments-keyword">Attachments:</span>
+						<ul class="attachments-files">
+							<li>
+								<a target="_blank" href="TestResults/OrderingMultipleCoffeesConfirmationNotification/OrderingMultipleCoffeesConfirmationNotification.txt">OrderingMultipleCoffeesConfirmationNotification.txt</a>
+							</li>
+							<li>
+								<a target="_blank" href="TestResults/OrderingMultipleCoffeesConfirmationNotification/OrderingMultipleCoffeesConfirmationNotification.png">OrderingMultipleCoffeesConfirmationNotification.png</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<hr>
+			</div>
+			
+			<!-- Data Scenario -->
+			<div class="data-item" id="1eb4427729b45454b5f84d3ac2d73e73">
+				
+				<!-- Scenario Section -->
+				<div class="section" style="width: fit-content; max-width: 98%">
+					
+					<!-- Data Scenario Tags -->
+					<div>
+						<span class="scenario-tags">@TA-2001 @InProgress</span>
+					</div>
+					
+					<!-- Data Scenario Name -->
+					<div>
+						<span class="status-dot bgcolor-passed"></span>
+						<span class="scenario-keyword">Scenario:
+						</span>
+						<span class="scenario-name">Successful Submitting a Registration Inquiry</span>
+						<span class="scenario-duration">6s 624ms</span>
+						<a href="#" class="scenario-attachments" title="Toggle Attachments" onclick="toggleAttachments(this)">☰</a>
+					</div>
+					
+					<!-- Data Scenario Steps -->
+					<div>
+						<ul class="scenario-steps">
+							<li>
+								<span class="step-marker color-passed">✓</span>
+								<span class="step-keyword">When</span>
+								<span class="step-name">I complete and submit the Registration formular</span>
+							</li>
+							<li>
+								<span class="step-marker color-passed">✓</span>
+								<span class="step-keyword">Then</span>
+								<span class="step-name">I should be redirected to the Login page</span>
+							</li>
+						</ul>
+					</div>
+					
+					<!-- Data Scenario Attachments -->
+					<div class="attachments" style="display: none;">
+						<span class="attachments-keyword">Attachments:</span>
+						<ul class="attachments-files">
+							<li>
+								<a target="_blank" href="TestResults/SuccessfulSubmittingARegistrationInquiry/SuccessfulSubmittingARegistrationInquiry.txt">SuccessfulSubmittingARegistrationInquiry.txt</a>
+							</li>
+							<li>
+								<a target="_blank" href="TestResults/SuccessfulSubmittingARegistrationInquiry/SuccessfulSubmittingARegistrationInquiry.png">SuccessfulSubmittingARegistrationInquiry.png</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<hr>
+			</div>
+			
+			<!-- Data Scenario -->
+			<div class="data-item" id="62a2bcc4d66ef0518838494fb0c59e43">
+				
+				<!-- Scenario Section -->
+				<div class="section" style="width: fit-content; max-width: 98%">
+					
+					<!-- Data Scenario Tags -->
+					<div>
+						<span class="scenario-tags">@TA-2002 @InProgress</span>
+					</div>
+					
+					<!-- Data Scenario Name -->
+					<div>
+						<span class="status-dot bgcolor-failed"></span>
+						<span class="scenario-keyword">Scenario:
+						</span>
+						<span class="scenario-name">Successful Canceling a Registration Inquiry</span>
+						<span class="scenario-duration">12s 417ms</span>
+						<a href="#" class="scenario-stacktraces bi bi-code-slash" title="Toggle Stacktrace" onclick="toggleStacktraces(this)"></a>
+						<a href="#" class="scenario-attachments" title="Toggle Attachments" onclick="toggleAttachments(this)">☰</a>
+					</div>
+					
+					<!-- Data Scenario Steps -->
+					<div>
+						<ul class="scenario-steps">
+							<li>
+								<span class="step-marker color-failed">✗</span>
+								<span class="step-keyword">When</span>
+								<span class="step-name">I complete and cancel the Registration formular</span>
+							</li>
+							
+							<!-- Data Step Message -->
+							<li>
+								<div class="message-box">
+									<div class="message-failed">
+										<b>ApplicationException</b>
+										<br>
+										Page element 'By.Name: cancel' was expected to exist within 5000 milliseconds...<br>
+									</div>
+								</div>
+							</li>
+							
+							<!-- Data Step Message -->
+							<li class="stacktraces" style="display : none;">
+								<div class="message-box">
+									<div class="message-failed">
+										<b>Stacktrace</b>
+										<br>
+										<div class="message-stacktrace">
+											at Expressium.Coffeeshop.Web.API.WebElements.WaitForElementExist(By locator, IWebDriver driver) in C:\Company\Source\Expressium.LivingDoc\Expressium.Coffeeshop.Web.API\WebElements.cs:line 145
+											<br>
+											at Expressium.Coffeeshop.Web.API.WebElements.GetElement(By locator, IWebDriver driver) in C:\Company\Source\Expressium.LivingDoc\Expressium.Coffeeshop.Web.API\WebElements.cs:line 274
+											<br>
+											at Expressium.Coffeeshop.Web.API.Controls.WebControl.GetElement() in C:\Company\Source\Expressium.LivingDoc\Expressium.Coffeeshop.Web.API\Controls\WebControl.cs:line 51
+											<br>
+											at Expressium.Coffeeshop.Web.API.Controls.WebControl.WaitForElementIsEnabled() in C:\Company\Source\Expressium.LivingDoc\Expressium.Coffeeshop.Web.API\Controls\WebControl.cs:line 81
+											<br>
+											at Expressium.Coffeeshop.Web.API.Controls.WebButton.Click() in C:\Company\Source\Expressium.LivingDoc\Expressium.Coffeeshop.Web.API\Controls\WebButton.cs:line 17
+											<br>
+											at Expressium.Coffeeshop.Web.API.Pages.RegistrationPage.ClickCancel() in C:\Company\Source\Expressium.LivingDoc\Expressium.Coffeeshop.Web.API\Pages\RegistrationPage.cs:line 127
+											<br>
+											at Expressium.Coffeeshop.Web.API.Tests.Steps.RegistrationSteps.WhenICompleteAndCancelTheRegistrationFormular() in C:\Company\Source\Expressium.LivingDoc\Expressium.Coffeeshop.Web.API.Tests\Steps\RegistrationSteps.cs:line 38
+											<br>
+											at InvokeStub_Action`1.Invoke(Object, Span`1)
+											<br>
+											at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+											<br>--- End of stack trace from previous location ---
+											<br>
+											at Reqnroll.Bindings.BindingInvoker.InvokeBindingAsync(IBinding binding, IContextManager contextManager, Object[] arguments, ITestTracer testTracer, DurationHolder durationHolder)
+											<br>
+											at Reqnroll.Infrastructure.TestExecutionEngine.ExecuteStepMatchAsync(BindingMatch match, Object[] arguments, DurationHolder durationHolder)
+											<br>
+											at Reqnroll.Infrastructure.TestExecutionEngine.ExecuteStepMatchAsync(BindingMatch match, Object[] arguments, DurationHolder durationHolder)
+											<br>
+											at Reqnroll.Infrastructure.TestExecutionEngine.&lt;&gt;c__DisplayClass56_0.&lt;<executestepasync>b__7&gt;d.MoveNext()
+												<br>--- End of stack trace from previous location ---
+												<br>
+												at Reqnroll.Infrastructure.TestExecutionEngine.&lt;&gt;c__DisplayClass56_0.&lt;<executestepasync>g__HandleStepExecutionExceptions|0&gt;d.MoveNext()<br>
+												</executestepasync>
+											</executestepasync>
+										</div>
+									</div>
+								</div>
+							</li>
+							<li>
+								<span class="step-marker color-skipped">✗</span>
+								<span class="step-keyword">Then</span>
+								<span class="step-name">I should be redirected to the Login page</span>
+							</li>
+						</ul>
+					</div>
+					
+					<!-- Data Scenario Attachments -->
+					<div class="attachments" style="display: none;">
+						<span class="attachments-keyword">Attachments:</span>
+						<ul class="attachments-files">
+							<li>
+								<a target="_blank" href="TestResults/SuccessfulCancelingARegistrationInquiry/SuccessfulCancelingARegistrationInquiry.txt">SuccessfulCancelingARegistrationInquiry.txt</a>
+							</li>
+							<li>
+								<a target="_blank" href="TestResults/SuccessfulCancelingARegistrationInquiry/SuccessfulCancelingARegistrationInquiry.png">SuccessfulCancelingARegistrationInquiry.png</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<hr>
+			</div>
+			
+			<!-- Data Scenario -->
+			<div class="data-item" id="5091d0b43e12a8549dc5d3dd0ec45c9b">
+				
+				<!-- Scenario Section -->
+				<div class="section" style="width: fit-content; max-width: 98%">
+					
+					<!-- Data Scenario Tags -->
+					<div>
+						<span class="scenario-tags">@TA-2003 @InProgress</span>
+					</div>
+					
+					<!-- Data Scenario Name -->
+					<div>
+						<span class="status-dot bgcolor-passed"></span>
+						<span class="scenario-keyword">Scenario:
+						</span>
+						<span class="scenario-name">Successful Resubmitting a Registration Inquiry</span>
+						<span class="scenario-duration">10s 150ms</span>
+						<a href="#" class="scenario-attachments" title="Toggle Attachments" onclick="toggleAttachments(this)">☰</a>
+					</div>
+					
+					<!-- Data Scenario Steps -->
+					<div>
+						<ul class="scenario-steps">
+							<li>
+								<span class="step-marker color-passed">✓</span>
+								<span class="step-keyword">When</span>
+								<span class="step-name">I complete and submit the Registration formular</span>
+							</li>
+							<li>
+								<span class="step-marker color-passed">✓</span>
+								<span class="step-keyword">And</span>
+								<span class="step-name">I complete and submit the Registration formular</span>
+							</li>
+							<li>
+								<span class="step-marker color-passed">✓</span>
+								<span class="step-keyword">Then</span>
+								<span class="step-name">I should be redirected to the Login page</span>
+							</li>
+						</ul>
+					</div>
+					
+					<!-- Data Scenario Attachments -->
+					<div class="attachments" style="display: none;">
+						<span class="attachments-keyword">Attachments:</span>
+						<ul class="attachments-files">
+							<li>
+								<a target="_blank" href="TestResults/SuccessfulResubmittingARegistrationInquiry/SuccessfulResubmittingARegistrationInquiry.txt">SuccessfulResubmittingARegistrationInquiry.txt</a>
+							</li>
+							<li>
+								<a target="_blank" href="TestResults/SuccessfulResubmittingARegistrationInquiry/SuccessfulResubmittingARegistrationInquiry.png">SuccessfulResubmittingARegistrationInquiry.png</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<hr>
+			</div>
+			
+			<!-- Data Analytics -->
+			<div class="data-item" id="analytics-features">
+				<div class="section">
+					<span class="page-name" data-testid="page-title">Analytics</span>
+				</div>
+				<hr>
+				<hr>
+				<div class="section" style="width: fit-content; margin: auto;">
+					<span class="chart-name" data-testid="features-chart-title">Features</span>
+					<div class="section chart-outline">
+						
+						<!-- Data Analytics Status Chart -->
+						<div class="section" style="text-align: center; margin: auto;">
+							<svg width="160px" height="168px" viewBox="0 0 42 42">
+								<g transform="rotate(-90, 21, 21)">
+									<circle class="donut-segment-skipped" cx="21" cy="21" r="15.9155"></circle>
+									<circle class="donut-segment-passed" cx="21" cy="21" r="15.9155" stroke-dasharray="25 75" stroke-dashoffset="0"></circle>
+									<circle class="donut-segment-incomplete" cx="21" cy="21" r="15.9155" stroke-dasharray="25 75" stroke-dashoffset="-25"></circle>
+									<circle class="donut-segment-failed" cx="21" cy="21" r="15.9155" stroke-dasharray="50 50" stroke-dashoffset="-50"></circle>
+								</g>
+								<g class="chart-text">
+									<text x="50%" y="50%" class="chart-number" data-testid="features-chart-passed">25%</text>
+									<text x="50%" y="50%" class="chart-label">Passed</text>
+								</g>
+							</svg>
+						</div>
+						<div class="section" style="text-align: center; margin: auto;">
+							<table align="center">
+								<tbody>
+									<tr>
+										<td class="color-passed chart-count">
+											<span class="chart-count-number">1</span>
+											<br>
+											<span class="chart-count-percentage">25%</span>
+											<br>
+											<span class="chart-count-status">Passed</span>
+											<br>
+											<div class="chart-count-bar bgcolor-passed"></div>
+										</td>
+										<td class="color-incomplete chart-count">
+											<span class="chart-count-number">1</span>
+											<br>
+											<span class="chart-count-percentage">25%</span>
+											<br>
+											<span class="chart-count-status">Incomplete</span>
+											<br>
+											<div class="chart-count-bar bgcolor-incomplete"></div>
+										</td>
+										<td class="color-failed chart-count">
+											<span class="chart-count-number">2</span>
+											<br>
+											<span class="chart-count-percentage">50%</span>
+											<br>
+											<span class="chart-count-status">Failed</span>
+											<br>
+											<div class="chart-count-bar bgcolor-failed"></div>
+										</td>
+										<td class="color-skipped chart-count">
+											<span class="chart-count-number">0</span>
+											<br>
+											<span class="chart-count-percentage">0%</span>
+											<br>
+											<span class="chart-count-status">Skipped</span>
+											<br>
+											<div class="chart-count-bar bgcolor-skipped"></div>
+										</td>
+										<td class="color-total chart-count">
+											<span class="chart-count-number">4</span>
+											<br>
+											<span class="chart-count-percentage">100%</span>
+											<br>
+											<span class="chart-count-status">Total</span>
+											<br>
+											<div class="chart-count-bar bgcolor-total"></div>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+				<hr>
+				
+				<!-- Data Analytics Duration -->
+				<div style="padding-top: 6px; text-align: center; justify-content: center; align-items: center; display: flex;">
+					<span class="bi bi-stopwatch duration-icon"></span>
+					<span class="duration-text">
+						<span class="duration-keyword">Duration:
+						</span>
+						<span data-testid="project-duration">20s 355ms</span>
+					</span>
+				</div>
+			</div>
+			
+			<!-- Data Analytics -->
+			<div class="data-item" id="analytics-scenarios">
+				<div class="section">
+					<span class="page-name" data-testid="page-title">Analytics</span>
+				</div>
+				<hr>
+				<hr>
+				<div class="section" style="width: fit-content; margin: auto;">
+					<span class="chart-name" data-testid="scenarios-chart-title">Scenarios</span>
+					<div class="section chart-outline">
+						
+						<!-- Data Analytics Status Chart -->
+						<div class="section" style="text-align: center; margin: auto;">
+							<svg width="160px" height="168px" viewBox="0 0 42 42">
+								<g transform="rotate(-90, 21, 21)">
+									<circle class="donut-segment-skipped" cx="21" cy="21" r="15.9155"></circle>
+									<circle class="donut-segment-passed" cx="21" cy="21" r="15.9155" stroke-dasharray="50 50" stroke-dashoffset="0"></circle>
+									<circle class="donut-segment-incomplete" cx="21" cy="21" r="15.9155" stroke-dasharray="20 80" stroke-dashoffset="-50"></circle>
+									<circle class="donut-segment-failed" cx="21" cy="21" r="15.9155" stroke-dasharray="20 80" stroke-dashoffset="-70"></circle>
+								</g>
+								<g class="chart-text">
+									<text x="50%" y="50%" class="chart-number" data-testid="scenarios-chart-passed">50%</text>
+									<text x="50%" y="50%" class="chart-label">Passed</text>
+								</g>
+							</svg>
+						</div>
+						<div class="section" style="text-align: center; margin: auto;">
+							<table align="center">
+								<tbody>
+									<tr>
+										<td class="color-passed chart-count">
+											<span class="chart-count-number">5</span>
+											<br>
+											<span class="chart-count-percentage">50%</span>
+											<br>
+											<span class="chart-count-status">Passed</span>
+											<br>
+											<div class="chart-count-bar bgcolor-passed"></div>
+										</td>
+										<td class="color-incomplete chart-count">
+											<span class="chart-count-number">2</span>
+											<br>
+											<span class="chart-count-percentage">20%</span>
+											<br>
+											<span class="chart-count-status">Incomplete</span>
+											<br>
+											<div class="chart-count-bar bgcolor-incomplete"></div>
+										</td>
+										<td class="color-failed chart-count">
+											<span class="chart-count-number">2</span>
+											<br>
+											<span class="chart-count-percentage">20%</span>
+											<br>
+											<span class="chart-count-status">Failed</span>
+											<br>
+											<div class="chart-count-bar bgcolor-failed"></div>
+										</td>
+										<td class="color-skipped chart-count">
+											<span class="chart-count-number">1</span>
+											<br>
+											<span class="chart-count-percentage">10%</span>
+											<br>
+											<span class="chart-count-status">Skipped</span>
+											<br>
+											<div class="chart-count-bar bgcolor-skipped"></div>
+										</td>
+										<td class="color-total chart-count">
+											<span class="chart-count-number">10</span>
+											<br>
+											<span class="chart-count-percentage">100%</span>
+											<br>
+											<span class="chart-count-status">Total</span>
+											<br>
+											<div class="chart-count-bar bgcolor-total"></div>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+				<hr>
+				
+				<!-- Data Analytics Duration -->
+				<div style="padding-top: 6px; text-align: center; justify-content: center; align-items: center; display: flex;">
+					<span class="bi bi-stopwatch duration-icon"></span>
+					<span class="duration-text">
+						<span class="duration-keyword">Duration:
+						</span>
+						<span data-testid="project-duration">20s 355ms</span>
+					</span>
+				</div>
+			</div>
+			
+			<!-- Data Analytics -->
+			<div class="data-item" id="analytics-steps">
+				<div class="section">
+					<span class="page-name" data-testid="page-title">Analytics</span>
+				</div>
+				<hr>
+				<hr>
+				<div class="section" style="width: fit-content; margin: auto;">
+					<span class="chart-name" data-testid="steps-chart-title">Steps</span>
+					<div class="section chart-outline">
+						
+						<!-- Data Analytics Status Chart -->
+						<div class="section" style="text-align: center; margin: auto;">
+							<svg width="160px" height="168px" viewBox="0 0 42 42">
+								<g transform="rotate(-90, 21, 21)">
+									<circle class="donut-segment-skipped" cx="21" cy="21" r="15.9155"></circle>
+									<circle class="donut-segment-passed" cx="21" cy="21" r="15.9155" stroke-dasharray="69 31" stroke-dashoffset="0"></circle>
+									<circle class="donut-segment-incomplete" cx="21" cy="21" r="15.9155" stroke-dasharray="7 93" stroke-dashoffset="-69"></circle>
+									<circle class="donut-segment-failed" cx="21" cy="21" r="15.9155" stroke-dasharray="7 93" stroke-dashoffset="-76"></circle>
+								</g>
+								<g class="chart-text">
+									<text x="50%" y="50%" class="chart-number" data-testid="steps-chart-passed">69%</text>
+									<text x="50%" y="50%" class="chart-label">Passed</text>
+								</g>
+							</svg>
+						</div>
+						<div class="section" style="text-align: center; margin: auto;">
+							<table align="center">
+								<tbody>
+									<tr>
+										<td class="color-passed chart-count">
+											<span class="chart-count-number">21</span>
+											<br>
+											<span class="chart-count-percentage">69%</span>
+											<br>
+											<span class="chart-count-status">Passed</span>
+											<br>
+											<div class="chart-count-bar bgcolor-passed"></div>
+										</td>
+										<td class="color-incomplete chart-count">
+											<span class="chart-count-number">2</span>
+											<br>
+											<span class="chart-count-percentage">7%</span>
+											<br>
+											<span class="chart-count-status">Incomplete</span>
+											<br>
+											<div class="chart-count-bar bgcolor-incomplete"></div>
+										</td>
+										<td class="color-failed chart-count">
+											<span class="chart-count-number">2</span>
+											<br>
+											<span class="chart-count-percentage">7%</span>
+											<br>
+											<span class="chart-count-status">Failed</span>
+											<br>
+											<div class="chart-count-bar bgcolor-failed"></div>
+										</td>
+										<td class="color-skipped chart-count">
+											<span class="chart-count-number">5</span>
+											<br>
+											<span class="chart-count-percentage">17%</span>
+											<br>
+											<span class="chart-count-status">Skipped</span>
+											<br>
+											<div class="chart-count-bar bgcolor-skipped"></div>
+										</td>
+										<td class="color-total chart-count">
+											<span class="chart-count-number">30</span>
+											<br>
+											<span class="chart-count-percentage">100%</span>
+											<br>
+											<span class="chart-count-status">Total</span>
+											<br>
+											<div class="chart-count-bar bgcolor-total"></div>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+				<hr>
+				
+				<!-- Data Analytics Duration -->
+				<div style="padding-top: 6px; text-align: center; justify-content: center; align-items: center; display: flex;">
+					<span class="bi bi-stopwatch duration-icon"></span>
+					<span class="duration-text">
+						<span class="duration-keyword">Duration:
+						</span>
+						<span data-testid="project-duration">20s 355ms</span>
+					</span>
+				</div>
+			</div>
+		</data>
+	</body>
+</html>

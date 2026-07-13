@@ -1,0 +1,25 @@
+13:11:48 INFO Expressium.Coffeeshop.Web.API.Tests.BaseTestFixture # 
+13:11:48 INFO Expressium.Coffeeshop.Web.API.Tests.BaseTestFixture # // Initialize Test Fixture
+13:11:48 INFO Expressium.Coffeeshop.Web.API.Tests.BaseTestFixture # Company: Expressium
+13:11:48 INFO Expressium.Coffeeshop.Web.API.Tests.BaseTestFixture # Project: Coffeeshop
+13:11:48 INFO Expressium.Coffeeshop.Web.API.Tests.BaseTestFixture # Environment: Development
+13:11:48 INFO Expressium.Coffeeshop.Web.API.Tests.BaseTestFixture # Url: https://expressium.dev/coffeeshop/index.html
+13:11:48 INFO Expressium.Coffeeshop.Web.API.Tests.BaseTestFixture # Id: 
+13:11:48 INFO Expressium.Coffeeshop.Web.API.Tests.BaseTestFixture # Name: OrderingCoffeeConfirmationNotificationLaSoledadAntioquia
+13:11:48 INFO Expressium.Coffeeshop.Web.API.Tests.BaseTestFixture # Category: 
+13:11:48 INFO Expressium.Coffeeshop.Web.API.Tests.BaseTestFixture # Description: Ordering Coffee Confirmation Notification
+13:11:48 INFO Expressium.Coffeeshop.Web.API.Tests.BaseTestFixture # Date: 26-08-2025 13:11
+13:11:50 INFO Expressium.Coffeeshop.Web.API.Pages.LoginPage # SetUsername(john.doe@microsoft.com)
+13:11:50 INFO Expressium.Coffeeshop.Web.API.Pages.LoginPage # SetPassword(1234567890)
+13:11:50 INFO Expressium.Coffeeshop.Web.API.Pages.LoginPage # ClickLogin()
+13:11:51 INFO Expressium.Coffeeshop.Web.API.Pages.MainMenuBar # ClickProducts()
+13:11:51 INFO Expressium.Coffeeshop.Web.API.BaseTable # ClickCell(La Soledad Antioquia, 6)
+13:11:51 INFO Expressium.Coffeeshop.Web.API.Tests.BaseTestFixture # 
+13:11:51 INFO Expressium.Coffeeshop.Web.API.Tests.BaseTestFixture # // Finalize Test Fixture
+13:11:51 INFO Expressium.Coffeeshop.Web.API.Tests.BaseTestFixture # Screenshot has been saved: OrderingCoffeeConfirmationNotificationLaSoledadAntioquia.png
+13:11:52 INFO Expressium.Coffeeshop.Web.API.Tests.BaseTestFixture # Number of passed tests: 1
+13:11:52 INFO Expressium.Coffeeshop.Web.API.Tests.BaseTestFixture # Number of skipped tests: 0
+13:11:52 INFO Expressium.Coffeeshop.Web.API.Tests.BaseTestFixture # Number of inconclusive tests: 0
+13:11:52 INFO Expressium.Coffeeshop.Web.API.Tests.BaseTestFixture # Number of failed tests: 0
+13:11:52 INFO Expressium.Coffeeshop.Web.API.Tests.BaseTestFixture # Testcase was successfully executed...
+

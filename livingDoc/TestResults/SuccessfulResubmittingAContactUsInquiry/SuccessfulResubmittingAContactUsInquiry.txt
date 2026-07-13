@@ -1,0 +1,67 @@
+14:40:14 INFO Expressium.Coffeeshop.Web.API.Tests.BaseTestFixture # 
+14:40:14 INFO Expressium.Coffeeshop.Web.API.Tests.BaseTestFixture # // Initialize Test Fixture
+14:40:14 INFO Expressium.Coffeeshop.Web.API.Tests.BaseTestFixture # Company: Expressium
+14:40:14 INFO Expressium.Coffeeshop.Web.API.Tests.BaseTestFixture # Project: Coffeeshop
+14:40:14 INFO Expressium.Coffeeshop.Web.API.Tests.BaseTestFixture # Environment: Development
+14:40:14 INFO Expressium.Coffeeshop.Web.API.Tests.BaseTestFixture # Url: https://expressium.dev/coffeeshop/index.html
+14:40:14 INFO Expressium.Coffeeshop.Web.API.Tests.BaseTestFixture # Id: 
+14:40:14 INFO Expressium.Coffeeshop.Web.API.Tests.BaseTestFixture # Name: SuccessfulResubmittingAContactUsInquiry
+14:40:14 INFO Expressium.Coffeeshop.Web.API.Tests.BaseTestFixture # Category: TA-3003
+14:40:14 INFO Expressium.Coffeeshop.Web.API.Tests.BaseTestFixture # Description: Successful Resubmitting a Contact Us Inquiry
+14:40:14 INFO Expressium.Coffeeshop.Web.API.Tests.BaseTestFixture # Date: 30-08-2025 14:40
+14:40:14 INFO Expressium.Coffeeshop.Web.API.Tests.BaseHooks # 
+14:40:14 INFO Expressium.Coffeeshop.Web.API.Tests.BaseHooks # // Given I have logged in with valid user credentials
+14:40:16 INFO Expressium.Coffeeshop.Web.API.Pages.LoginPage # SetUsername(john.doe@microsoft.com)
+14:40:17 INFO Expressium.Coffeeshop.Web.API.Pages.LoginPage # SetPassword(1234567890)
+14:40:17 INFO Expressium.Coffeeshop.Web.API.Pages.LoginPage # ClickLogin()
+14:40:18 INFO Expressium.Coffeeshop.Web.API.Tests.BaseHooks # 
+14:40:18 INFO Expressium.Coffeeshop.Web.API.Tests.BaseHooks # // When I complete and submit the Contact Us formular
+14:40:18 INFO Expressium.Coffeeshop.Web.API.Pages.MainMenuBar # ClickContactUs()
+14:40:18 INFO Expressium.Coffeeshop.Web.API.Pages.ContactUsPage # SetName(John Doe)
+14:40:18 INFO Expressium.Coffeeshop.Web.API.Pages.ContactUsPage # SetEmail(john.doe@microsoft.com)
+14:40:19 INFO Expressium.Coffeeshop.Web.API.Pages.ContactUsPage # SetSubject(Detailed product information)
+14:40:19 INFO Expressium.Coffeeshop.Web.API.Pages.ContactUsPage # SetMessage(Please send some more detailed product information...)
+14:40:19 INFO Expressium.Coffeeshop.Web.API.Pages.ContactUsPage # ClickSend()
+14:40:20 INFO Expressium.Coffeeshop.Web.API.Tests.BaseTestFixture # 
+14:40:20 INFO Expressium.Coffeeshop.Web.API.Tests.BaseTestFixture # // Finalize Test Fixture
+14:40:20 INFO Expressium.Coffeeshop.Web.API.Tests.BaseTestFixture # Screenshot has been saved: SuccessfulResubmittingAContactUsInquiry.png
+14:40:21 ERROR Expressium.Coffeeshop.Web.API.Tests.BaseTestFixture # No matching step definition found for one or more steps.
+14:40:21 ERROR Expressium.Coffeeshop.Web.API.Tests.BaseTestFixture # using System;
+14:40:21 ERROR Expressium.Coffeeshop.Web.API.Tests.BaseTestFixture # using Reqnroll;
+14:40:21 ERROR Expressium.Coffeeshop.Web.API.Tests.BaseTestFixture # namespace MyNamespace
+14:40:21 ERROR Expressium.Coffeeshop.Web.API.Tests.BaseTestFixture # {
+14:40:21 ERROR Expressium.Coffeeshop.Web.API.Tests.BaseTestFixture #     [Binding]
+14:40:21 ERROR Expressium.Coffeeshop.Web.API.Tests.BaseTestFixture #     public class StepDefinitions
+14:40:21 ERROR Expressium.Coffeeshop.Web.API.Tests.BaseTestFixture #     {
+14:40:21 ERROR Expressium.Coffeeshop.Web.API.Tests.BaseTestFixture #         private readonly IReqnrollOutputHelper _outputHelper;
+14:40:21 ERROR Expressium.Coffeeshop.Web.API.Tests.BaseTestFixture #         public StepDefinitions(IReqnrollOutputHelper outputHelper)
+14:40:21 ERROR Expressium.Coffeeshop.Web.API.Tests.BaseTestFixture #         {
+14:40:21 ERROR Expressium.Coffeeshop.Web.API.Tests.BaseTestFixture #             _outputHelper = outputHelper;
+14:40:21 ERROR Expressium.Coffeeshop.Web.API.Tests.BaseTestFixture #         }
+14:40:21 ERROR Expressium.Coffeeshop.Web.API.Tests.BaseTestFixture #         [When("I resubmit the Contact Us formular")]
+14:40:21 ERROR Expressium.Coffeeshop.Web.API.Tests.BaseTestFixture # public void WhenIResubmitTheContactUsFormular()
+14:40:21 ERROR Expressium.Coffeeshop.Web.API.Tests.BaseTestFixture # {
+14:40:21 ERROR Expressium.Coffeeshop.Web.API.Tests.BaseTestFixture #     throw new PendingStepException();
+14:40:21 ERROR Expressium.Coffeeshop.Web.API.Tests.BaseTestFixture # }
+14:40:21 ERROR Expressium.Coffeeshop.Web.API.Tests.BaseTestFixture #     }
+14:40:21 ERROR Expressium.Coffeeshop.Web.API.Tests.BaseTestFixture # }
+14:40:21 DEBUG Expressium.Coffeeshop.Web.API.Tests.BaseTestFixture #    at Reqnroll.NUnit.ReqnrollPlugin.NUnitRuntimeProvider.TestInconclusive(String message)
+14:40:21 DEBUG Expressium.Coffeeshop.Web.API.Tests.BaseTestFixture #    at Reqnroll.NUnit.ReqnrollPlugin.NUnitRuntimeProvider.TestPending(String message)
+14:40:21 DEBUG Expressium.Coffeeshop.Web.API.Tests.BaseTestFixture #    at Reqnroll.ErrorHandling.ErrorProvider.ThrowPendingError(ScenarioExecutionStatus testStatus, String message)
+14:40:21 DEBUG Expressium.Coffeeshop.Web.API.Tests.BaseTestFixture #    at Reqnroll.Infrastructure.TestExecutionEngine.OnAfterLastStepAsync()
+14:40:21 DEBUG Expressium.Coffeeshop.Web.API.Tests.BaseTestFixture #    at Reqnroll.TestRunner.CollectScenarioErrorsAsync()
+14:40:21 DEBUG Expressium.Coffeeshop.Web.API.Tests.BaseTestFixture #    at Expressium.Coffeeshop.Web.API.Tests.Features.Inquiries.ContactUsFeature.ScenarioCleanupAsync()
+14:40:21 DEBUG Expressium.Coffeeshop.Web.API.Tests.BaseTestFixture #    at Expressium.Coffeeshop.Web.API.Tests.Features.Inquiries.ContactUsFeature.SuccessfulResubmittingAContactUsInquiry() in C:\Company\Source\Expressium.LivingDoc\Expressium.Coffeeshop.Web.API.Tests\Features\Inquiries\ContactUs.feature:line 24
+14:40:21 DEBUG Expressium.Coffeeshop.Web.API.Tests.BaseTestFixture #    at NUnit.Framework.Internal.TaskAwaitAdapter.GenericAdapter`1.GetResult()
+14:40:21 DEBUG Expressium.Coffeeshop.Web.API.Tests.BaseTestFixture #    at NUnit.Framework.Internal.AsyncToSyncAdapter.Await[TResult](TestExecutionContext context, Func`1 invoke)
+14:40:21 DEBUG Expressium.Coffeeshop.Web.API.Tests.BaseTestFixture #    at NUnit.Framework.Internal.AsyncToSyncAdapter.Await(TestExecutionContext context, Func`1 invoke)
+14:40:21 DEBUG Expressium.Coffeeshop.Web.API.Tests.BaseTestFixture #    at NUnit.Framework.Internal.Commands.TestMethodCommand.RunTestMethod(TestExecutionContext context)
+14:40:21 DEBUG Expressium.Coffeeshop.Web.API.Tests.BaseTestFixture #    at NUnit.Framework.Internal.Commands.TestMethodCommand.Execute(TestExecutionContext context)
+14:40:21 DEBUG Expressium.Coffeeshop.Web.API.Tests.BaseTestFixture #    at NUnit.Framework.Internal.Commands.BeforeAndAfterTestCommand.<>c__DisplayClass1_0.<Execute>b__0()
+14:40:21 DEBUG Expressium.Coffeeshop.Web.API.Tests.BaseTestFixture #    at NUnit.Framework.Internal.Commands.DelegatingTestCommand.RunTestMethodInThreadAbortSafeZone(TestExecutionContext context, Action action)
+14:40:21 INFO Expressium.Coffeeshop.Web.API.Tests.BaseTestFixture # Number of passed tests: 0
+14:40:21 INFO Expressium.Coffeeshop.Web.API.Tests.BaseTestFixture # Number of skipped tests: 0
+14:40:21 INFO Expressium.Coffeeshop.Web.API.Tests.BaseTestFixture # Number of inconclusive tests: 1
+14:40:21 INFO Expressium.Coffeeshop.Web.API.Tests.BaseTestFixture # Number of failed tests: 0
+14:40:21 INFO Expressium.Coffeeshop.Web.API.Tests.BaseTestFixture # Testcase was inconclusive executed...
+
