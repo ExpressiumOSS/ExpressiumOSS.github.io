@@ -1,0 +1,73 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Login</title>
+    <link href="./stylesheet.css" rel="stylesheet" type="text/css" />
+    <script>
+        function validateForm() {
+            let username = document.forms["loginForm"]["username"].value;
+            let password = document.forms["loginForm"]["password"].value;
+            if (username == "" || password == "") {
+                document.getElementById("notification").innerHTML = "<td class='error'>Invalid Username or Password</td>";
+                return false;
+            }
+            return true;
+        }
+    </script>
+</head>
+<body>
+    <header>
+        The Coffee Shop
+    </header>
+    <!--<nav id="mainmenu">
+        <div class="topnav">
+        </div>
+    </nav>-->
+    <br />
+    <br />
+
+    <form name="loginForm" onsubmit="return validateForm()" action="home.html">
+        <table class="logintable" style="width:400px;">
+            <tr>
+                <th>Login</th>
+            </tr>
+            <tr>
+                <td>
+                    <br />
+                    <label for="username" class="labelTop">Username</label>
+                    <input class="wide" name="username" type="text" id="username" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="password">Password</label>
+                    <input class="wide" name="password" type="password" id="password" />
+                    <br />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <br />
+                    <button type="submit" name="submit" id="submit" class="login">Log In</button>
+                    <p>Not registered?<a class="active" href="Registration.html"> Create an account</a></p>
+                </td>
+            </tr>
+
+            <tr id="notification"></tr>
+        </table>
+    </form>
+    <div class="container">
+        <div id="spinner" class="loader"></div>
+        <script>
+            setTimeout(function () { document.querySelector('.loader').style.display = 'none'; }, 1500);
+        </script>
+    </div>
+    <footer>
+        <br />
+        <div class="footer">
+            &copy; 2026 Expressium All Rights Reserved
+        </div>
+        <br />
+    </footer>
+</body>
+</html>

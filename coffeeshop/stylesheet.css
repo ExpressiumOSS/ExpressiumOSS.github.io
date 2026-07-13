@@ -1,0 +1,220 @@
+﻿body {
+    font-family: Arial;
+    padding-left: 12px;
+    padding-right: 12px;
+    font-size: 14px;
+}
+
+h1 {
+    font-family: Arial;
+    color: slategray;
+    font-size: 28px;
+    font-weight: bold;
+    margin-top: 16px;
+    margin-bottom: 0px;
+}
+
+h2 {
+    font-family: Arial;
+    font-size: 18px;
+    font-weight: bold;
+    margin-top: 16px;
+    margin-bottom: 0px;
+}
+
+h3 {
+    font-family: Arial;
+    font-size: 16px;
+    margin-top: 16px;
+    margin-bottom: 10px;
+}
+
+h4 {
+    color: darkgrey;
+    font-style: italic;
+    font-weight: normal;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+caption {
+    padding: 5px;
+    background-color: sienna;
+    color: whitesmoke;
+    font-weight: bold;
+    text-align: center;
+}
+
+tr.odd {
+    background-color: whitesmoke;
+}
+
+th, td {
+    padding: 5px;
+    text-align: left;
+}
+
+th {
+    background-color: peru;
+    color: white;
+}
+
+header {
+    padding: 16px;
+    font-size: large;
+    font-weight: bold;
+    background-color: sienna;
+    color: whitesmoke;
+    text-align: left;
+    font-family: 'Lucida Handwriting';
+    font-size: 36px;
+}
+
+footer {
+    font-size: smaller;
+    font-weight: bold;
+    color: whitesmoke;
+    text-align: center;
+}
+
+.footer {
+    background-color: peru;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+ul.List {
+    list-style-type: none;
+    text-wrap: none;
+}
+
+ul.Tree {
+    list-style-type: square;
+}
+
+/* Add a black background color to the top navigation */
+.topnav {
+    background-color: peru;
+    overflow: hidden;
+}
+
+    /* Style the links inside the navigation bar */
+    .topnav a {
+        float: left;
+        color: #f2f2f2;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+        font-size: 16px;
+    }
+
+        /* Change the color of links on hover */
+        .topnav a:hover {
+            background-color: #ddd;
+            color: black;
+        }
+
+        /* Add a color to the active/current link */
+        .topnav a.active {
+            background-color: #2471A3;
+            background-color: tan;
+            color: white;
+        }
+
+.login {
+    background-color: lightgray;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 10px;
+    width: 100%;
+}
+
+.logintable {
+    margin-left: auto;
+    margin-right: auto;
+    width: 400px;
+    border: 1px;
+}
+
+    .logintable th {
+        font-size: 24px;
+        font-weight: bold;
+        text-align: center;
+    }
+
+    .logintable td {
+        padding: 6px 20px 6px 16px;
+    }
+
+.center {
+    text-align: center;
+}
+
+.wide {
+    width: 100%;
+}
+
+.divTable {
+    display: table;
+    width: 100%;
+    border-spacing: 20px;
+}
+
+.divRow {
+    display: table-row;
+    width: auto;
+}
+
+.divCell {
+    float: left;
+    display: table-column;
+    width: 30%;
+    padding: 10px 10px 10px 10px;
+    border-spacing: 20px;
+}
+
+.divCellHeader {
+    align-content: center;
+}
+
+img.center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.container {
+    margin: auto;
+    width: 50px;
+    border: none;
+    padding: 5px;
+}
+
+.loader {
+    border: 16px solid #f3f3f3;
+    border-top: 16px solid #3498db;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.error {
+    color: #D8000C;
+    text-align: center;
+    font-style: italic;
+    font-weight: bold;
+    background-color: #FFBABA;
+}

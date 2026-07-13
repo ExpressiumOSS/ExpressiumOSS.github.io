@@ -1,0 +1,129 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Registration</title>
+    <link href="./stylesheet.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+    <header>
+        The Coffee Shop
+    </header>
+    <nav id="mainmenu">
+        <div class="topnav">
+        </div>
+    </nav>
+    <br />
+    <br />
+
+    <form method="post" action="./index.html" id="registration">
+        <table class="logintable" style="width:400px;">
+            <tr>
+                <th>Registration</th>
+            </tr>
+            <tr>
+                <td>
+                    <br />
+                    <label for="firstname">First Name</label>
+                    <input name="firstname" type="text" id="firstname" class="wide" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="lastname">Last Name</label>
+                    <input name="lastname" type="text" id="lastname" class="wide" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="country">Country</label>
+                    <select name="country" id="country" class="wide">
+                        <option value="">--Select Country--</option>
+                        <option value="Denmark" selected>Denmark</option>
+                        <option value="Finland">Finland</option>
+                        <option value="Norway">Norway</option>
+                        <option value="Sweden">Sweden</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="vehicle">Vehicle</label>
+                    <select name="vehicle" id="vehicle" multiple="multiple" class="wide">
+                        <option>Volkswagen</option>
+                        <option>Toyota</option>
+                        <option selected>Volvo</option>
+                        <option>Ford</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="email">E-mail</label>
+                    <input name="email" type="text" id="email" class="wide" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="phone">Phone</label>
+                    <input name="phone" type="text" id="phone" class="wide" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="gender">Gender</label>
+                    <div class="center">
+                        <span id="gender">
+                            <input id="gender_0" type="radio" name="gender" value="Male" checked="checked" />
+                            <label for="gender_0">Male</label>
+                            <input id="gender_1" type="radio" name="gender" value="Female" />
+                            <label for="gender_1">Female</label>
+                        </span>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="password">Password</label>
+                    <input name="password" type="password" id="password" class="wide" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="password2">Confirm Password</label>
+                    <input name="password2" type="password" id="password2" class="wide" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input id="agreement" type="checkbox" name="agreement" />
+                    <label for="agreement"> I agree to the Terms of Use...</label>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <br />
+                    <input type="button" onclick="window.location.href='index.html';" name="submit" value="Submit" id="submit" class="login" style="width:100%;" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="reset" name="reset" value="Reset" class="reset" style="width:100%;" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="button" onclick="window.location.href='index.html';" name="cancel" value="Cancel" style="width:100%;" />
+                    <p></p>
+                </td>
+            </tr>
+        </table>
+    </form>
+    <footer>
+        <br />
+        <div class="footer">
+            &copy; 2026 Expressium All Rights Reserved
+        </div>
+        <br />
+    </footer>
+</body>
+</html>

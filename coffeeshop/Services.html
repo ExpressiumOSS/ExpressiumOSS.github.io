@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Services</title>
+    <link href="./stylesheet.css" rel="stylesheet" type="text/css" />
+    <script>
+        function addProduct(number) {
+            document.getElementById("notification").innerHTML = "A product with a cost of " + number + " has been added to your basket - Thanks...";
+        }
+    </script>
+</head>
+<body>
+    <header>
+        The Coffee Shop
+    </header>
+    <nav id="mainmenu">
+        <div class="topnav">
+            <a href="home.html">Home</a>
+            <a href="products.html">Products</a>
+            <a href="contactUs.html">Contact Us</a>
+            <a href="login.html">Logout</a>
+        </div>
+    </nav>
+    <div id="content">
+        <h1>Services</h1>
+        <p>
+            We bring you a wide selection of superior quality coffee and brewing equipment...
+        </p>
+        <div style="padding-left:10px">
+            <h3>Orders</h3>
+            <table id="products">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Country</th>
+                        <th>Type</th>
+                        <th>Brand</th>
+                        <th>Price</th>
+                        <th>Active</th>
+                        <th>Note</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="odd">
+                        <td>1</td>
+                        <td><span hidden>Title</span>Brazil</td>
+                        <td>Espresso</td>
+                        <td>Santa Rita Cerrado Mineiro</td>
+                        <td>$99</td>
+                        <td><input type="checkbox" id="active1" /></td>
+                        <td><input type="text" id="note1" /></td>
+                        <td><button name="NO1000" onclick="addProduct('$99')">Add</button></td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td><strong>Guatemala</strong></td>
+                        <td>Lungo</td>
+                        <td>La Ceiba Huehuetenango</td>
+                        <td>$88</td>
+                        <td><input type="checkbox" id="active1" /></td>
+                        <td><input type="text" id="note2" /></td>
+                        <td><button name="NO1003" onclick="addProduct('$88')">Add</button></td>
+                    </tr>
+                    <tr class="odd">
+                        <td>3</td>
+                        <td> Colombia </td>
+                        <td>Lungo</td>
+                        <td><a href="Services.html">La Soledad Antioquia</a></td>
+                        <td>$77</td>
+                        <td><input type="checkbox" id="active1" /></td>
+                        <td><input type="text" id="note3" /></td>
+                        <td><button name="NO1002" onclick="addProduct('$77')">Add</button></td>
+                    </tr>
+                </tbody>
+            </table>
+            <div><h4 id="notification"></h4></div>
+        </div>
+    </div>
+    <footer>
+        <br />
+        <div class="footer">
+            &copy; 2026 Expressium All Rights Reserved
+        </div>
+        <br />
+    </footer>
+</body>
+</html>

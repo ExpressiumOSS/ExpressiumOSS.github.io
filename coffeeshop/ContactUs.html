@@ -1,0 +1,82 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Contact Us</title>
+    <link href="./stylesheet.css" rel="stylesheet" type="text/css" />
+    <script>
+        function validateForm() {
+            let name = document.forms["contactUsForm"]["your-name"].value;
+            let email = document.forms["contactUsForm"]["your-email"].value;
+            let subject = document.forms["contactUsForm"]["your-subject"].value;
+            let message = document.forms["contactUsForm"]["your-message"].value;
+            if (name == "" || email == "" || subject == "" || message == "") {
+                document.getElementById("notification").innerHTML = "Invalid or missing contact information in formular - ERROR...";
+                return false;
+            }
+
+            document.getElementById("contactUsForm").reset();
+            document.getElementById("notification").innerHTML = "Your contact information has been send - Thanks...";
+            return true;
+        }
+    </script>
+</head>
+<body>
+    <header>
+        The Coffee Shop
+    </header>
+    <nav id="mainmenu">
+        <div class="topnav">
+            <a href="home.html">Home</a>
+            <a href="products.html">Products</a>
+            <a class="active" href="contactUs.html">Contact Us</a>
+            <a href="login.html">Logout</a>
+        </div>
+    </nav>
+    <div id="content">
+        <h1>Contact Us</h1>
+        <p>
+            We bring you a wide selection of superior quality coffee and brewing equipment...
+        </p>
+        <h3>Get In Touch</h3>
+        <div>
+            <form id="contactUsForm" action="home.html" method="post">
+                <p>
+                    <label>
+                        Name<br>
+                        <input type="text" name="your-name" value="" size="40" aria-required="true" aria-invalid="false">
+                    </label>
+                </p>
+                <p>
+                    <label>
+                        Email<br>
+                        <input type="email" name="your-email" value="" size="40" aria-required="true" aria-invalid="false">
+                    </label>
+                </p>
+                <p>
+                    <label>
+                        Subject<br>
+                        <input type="text" name="your-subject" value="" size="40" aria-invalid="false">
+                    </label>
+                </p>
+                <p>
+                    <label>
+                        Message<br>
+                        <textarea name="your-message" cols="42" rows="4" aria-invalid="false"></textarea>
+                    </label>
+                </p>
+                <p>
+                    <input type="button" onclick="validateForm()" value="Send">
+                </p>
+            </form>
+            <div><h4 id="notification"></h4></div>
+        </div>
+    </div>
+    <footer>
+        <br />
+        <div class="footer">
+            &copy; 2026 Expressium All Rights Reserved
+        </div>
+        <br />
+    </footer>
+</body>
+</html>
